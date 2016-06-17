@@ -5,11 +5,12 @@
  */
 package radiomaster;
 
-import radiomaster.view.Login;
+import radiomaster.view.login;
+import radiomaster.view.view_categories;
 
 /**
  *
- * @author Gauss Developer
+ * @author Ema
  */
 public class RadioMaster {
 
@@ -17,9 +18,8 @@ public class RadioMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        new Login().setVisible(true);
-        
+        new login().setVisible(true);
+        new view_categories().setVisible(true);
     }
     
 }

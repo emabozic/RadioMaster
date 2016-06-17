@@ -1,2 +1,2 @@
-ggggggggg# RadioMaster
+# RadioMaster
 zadatak
