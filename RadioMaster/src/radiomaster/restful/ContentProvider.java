@@ -2,6 +2,7 @@ package radiomaster.restful;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -40,6 +41,7 @@ THE SOFTWARE.
 public class ContentProvider {
     private static final String mUrl = "http://radiomaster.gaussx.com/web/app_dev.php/api/";
     public static final String mStations = mUrl + "stations/favorites/list";
+    public static final String mLogin = mUrl + " user/login";
     
     /**
      * get data from the server with internally declared route to the server
@@ -65,11 +67,11 @@ public class ContentProvider {
         System.out.println("Requested URL:" + myURL);
 
         StringBuilder sb = new StringBuilder();
-        URLConnection urlConn = null;
+        HttpURLConnection urlConn = null;
         InputStreamReader in = null;
         try {
             URL url = new URL(myURL);
-            urlConn = url.openConnection();
+            urlConn = (HttpURLConnection) url.openConnection();
             if (urlConn != null) {
                 urlConn.setReadTimeout(60 * 1000);
             }

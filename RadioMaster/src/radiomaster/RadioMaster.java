@@ -6,7 +6,7 @@
 package radiomaster;
 
 import radiomaster.view.login;
-import radiomaster.view.view_categories;
+
 
 /**
  *
@@ -19,7 +19,8 @@ public class RadioMaster {
      */
     public static void main(String[] args) {
         new login().setVisible(true);
-        new view_categories().setVisible(true);
+        
+        
     }
     
 }
