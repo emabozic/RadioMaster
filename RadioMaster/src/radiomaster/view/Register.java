@@ -6,6 +6,19 @@
 package radiomaster.view;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import radiomaster.utility.Utility;
 
 /**
@@ -17,12 +30,14 @@ public class Register extends javax.swing.JFrame {
     /**
      * Creates new form Register
      */
-    public Register() {
+    public Register() throws MalformedURLException, UnsupportedEncodingException, IOException {
         initComponents();
         Utility.center(this);
         setResizable(false);
         getContentPane().setBackground(Color.white);
         setTitle("New Account");
+
+        
     }
 
     /**
@@ -40,8 +55,8 @@ public class Register extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
-        SignIn = new javax.swing.JButton();
+        btnSignIn = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,7 +69,12 @@ public class Register extends javax.swing.JFrame {
 
         lblPassword.setText("Password: ");
 
-        SignIn.setText("Sign in");
+        btnSignIn.setText("Sign in");
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,7 +99,7 @@ public class Register extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SignIn)
+                .addComponent(btnSignIn)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,10 +115,10 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(lblEmail))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(SignIn)
+                    .addComponent(lblPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(btnSignIn)
                 .addGap(23, 23, 23))
         );
 
@@ -116,24 +136,69 @@ public class Register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            // TODO add your handling code here:
+            URL url = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/user/register");
+            Map<String, Object> params = new LinkedHashMap<>();
+            
+            params.put("username", txtUsername.getText());
+            params.put("email", txtEmail.getText());
+            params.put("password", String.valueOf(txtPassword.getPassword()));
+
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String, Object> param : params.entrySet()) {
+                if (postData.length() != 0) {
+                    postData.append('&');
+                }
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+            for (int c; (c = in.read()) >= 0;) {
+                System.out.print((char) c);
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSignInActionPerformed
+
     /**
      * @param args the command line arguments
      */
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton SignIn;
+    private javax.swing.JButton btnSignIn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

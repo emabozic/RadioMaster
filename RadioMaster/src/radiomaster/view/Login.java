@@ -5,25 +5,42 @@
  */
 package radiomaster.view;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import radiomaster.model.Response;
+import radiomaster.restful.LoginProccessing;
 import radiomaster.utility.Utility;
 
 /**
  *
  * @author Gauss Developer
  */
-public class login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form login
      */
-    public login() {
+    public Login() {
         initComponents();
         setTitle(Utility.APP_NAME);
         Utility.center(this);
         setResizable(false);
         getContentPane().setBackground(Color.white);
-        
+
         lblRegister.setForeground(Color.BLUE);
         lblForget.setForeground(Color.RED);
     }
@@ -38,11 +55,11 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         panelLogin = new javax.swing.JPanel();
-        txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
-        lblUsername = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
         lblForget = new javax.swing.JLabel();
         lblRegister = new javax.swing.JLabel();
 
@@ -58,7 +75,7 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        lblUsername.setText("Username: ");
+        lblEmail.setText("Email:");
 
         lblPassword.setText("Password: ");
 
@@ -70,13 +87,13 @@ public class login extends javax.swing.JFrame {
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUsername)
-                            .addComponent(lblPassword))
-                        .addGap(18, 18, 18)
                         .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblPassword)
+                            .addComponent(lblEmail))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)))
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGap(203, 203, 203)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -87,12 +104,12 @@ public class login extends javax.swing.JFrame {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsername))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail))
                 .addGap(18, 18, 18)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
+                    .addComponent(lblPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
@@ -140,26 +157,69 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            URL url = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/user/login");
+            Map<String, Object> params = new LinkedHashMap<>();
+
+            params.put("email", txtEmail.getText());
+            params.put("password", String.valueOf(txtPassword.getPassword()));
+
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String, Object> param : params.entrySet()) {
+                if (postData.length() != 0) {
+                    postData.append('&');
+                }
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            }
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+
+            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+            for (int c; (c = in.read()) >= 0;) {
+                System.out.print((char) c);
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
-        new Register().setVisible(true);
+        try {
+            new Register().setVisible(true);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblRegisterMouseClicked
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblForget;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRegister;
-    private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel panelLogin;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtUsername;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

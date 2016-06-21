@@ -35,7 +35,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,7 +81,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="SignIn" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSignIn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -101,11 +101,11 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPassword" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
-                  <Component id="SignIn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <Component id="btnSignIn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -131,12 +131,15 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmail">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPassword">
-        </Component>
-        <Component class="javax.swing.JButton" name="SignIn">
+        <Component class="javax.swing.JButton" name="btnSignIn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sign in"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignInActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
         </Component>
       </SubComponents>
     </Container>

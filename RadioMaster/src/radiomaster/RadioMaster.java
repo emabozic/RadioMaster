@@ -5,7 +5,9 @@
  */
 package radiomaster;
 
-import radiomaster.view.login;
+import radiomaster.view.Login;
+
+
 
 
 /**
@@ -18,7 +20,9 @@ public class RadioMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new login().setVisible(true);
+        new Login().setVisible(true);
+        
+        
         
         
     }

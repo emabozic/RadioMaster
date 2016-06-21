@@ -11,13 +11,20 @@ package radiomaster.model;
  */
 public class Login {
     
-    int userID;
-    String username;
-    String password;
-    String email;
-    String newPassword;
-    
-    
+    private int id;
+    private String username;
+    private String password;
+    private String email;
+    private String createdAt;
+    private String updatedAt;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -43,14 +50,25 @@ public class Login {
         this.email = email;
     }
 
-    public String getNewPassword() {
-        return newPassword;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
     
+    
+    
+
     
             
     
