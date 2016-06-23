@@ -27,10 +27,6 @@ package radiomaster.view;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,16 +36,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 import radiomaster.model.model_categories;
 import radiomaster.restful.Response;
 
@@ -102,7 +89,7 @@ public class view_categories extends javax.swing.JFrame {
 
             in.close();
 
-            //System.out.println(sBuffer);
+            System.out.println(sBuffer);
             java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
             }.getType();
 
@@ -179,19 +166,17 @@ public class view_categories extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenu1ActionPerformed
-                
-     
+
     }//GEN-LAST:event_jmenu1ActionPerformed
 
     private void jmenu1MenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_jmenu1MenuKeyPressed
-             
 
     }//GEN-LAST:event_jmenu1MenuKeyPressed
 
@@ -203,6 +188,6 @@ public class view_categories extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jmenu;
     private javax.swing.JMenu jmenu1;
-    public static javax.swing.JMenuBar jmenubar;
+    private javax.swing.JMenuBar jmenubar;
     // End of variables declaration//GEN-END:variables
 }
