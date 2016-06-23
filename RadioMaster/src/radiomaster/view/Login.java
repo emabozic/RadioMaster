@@ -5,28 +5,27 @@
  */
 package radiomaster.view;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import radiomaster.model.Response;
+import radiomaster.restful.HttpWrapper;
 import radiomaster.utility.Utility;
+import static radiomaster.restful.HttpWrapper.LOGIN_URL;
+
+
 
 /**
  *
  * @author Gauss Developer
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
+    
     /**
      * Creates new form login
      */
@@ -39,6 +38,10 @@ public class Login extends javax.swing.JFrame {
 
         lblRegister.setForeground(Color.BLUE);
         lblForget.setForeground(Color.RED);
+        
+        
+        
+        
     }
 
     /**
@@ -153,55 +156,39 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        
+        
+
+            HttpWrapper wrapper = new HttpWrapper();
+            String postdata = "email=" + txtEmail.getText() + "&" + "password=" + String.valueOf(txtPassword.getPassword());
+            byte[] bodyContent = postdata.getBytes();
+            
+            wrapper.setURL(LOGIN_URL)
+                    .setMethod("POST")
+                    .setOnCompletionListener(this)
+                    .setBody(bodyContent);
+            
+            
+            
+            wrapper.run();
+            
         try {
-            // TODO add your handling code here:
-            URL url = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/user/login");
-            Map<String, Object> params = new LinkedHashMap<>();
-
-            params.put("email", txtEmail.getText());
-            params.put("password", String.valueOf(txtPassword.getPassword()));
-
-            StringBuilder postData = new StringBuilder();
-            for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (postData.length() != 0) {
-                    postData.append('&');
-                }
-                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                postData.append('=');
-                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-            }
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            conn.getOutputStream().write(postDataBytes);
-
-            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-            for (int c; (c = in.read()) >= 0;) {
-                System.out.print((char) c);
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            int code = wrapper.getHttpConn().getResponseCode();
+            System.out.println("code " + code);
         } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            
+            
+            
+            
+        
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
-        try {
-            new Register().setVisible(true);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Register().setVisible(true);
+        
     }//GEN-LAST:event_lblRegisterMouseClicked
 
     /**
@@ -218,4 +205,44 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
+
+private boolean kontrola() {
+       
+       
+       if (txtEmail.getText().trim().length() == 0) {
+            Utility.error(this, "Insert your email in format example@example.com");
+            txtEmail.requestFocus();
+            return false;
+        }
+      if (new String(txtPassword.getPassword()).length() == 0) {
+            Utility.error(this, "Insert password");
+            txtPassword.requestFocus();
+            return false;
+        }
+      
+      
+       return true;       
+       
+    }
+
+    @Override
+    public void onSuccess(String successBody) {
+        System.out.println("Successful login");
+        
+        
+     
+    }
+
+    @Override
+    public void onError(String error) {
+        
+      System.out.println("Invalid username or password");
+      
+      
+      
+    }
+        
+   
+
+
 }

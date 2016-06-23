@@ -39,6 +39,17 @@ public class HttpWrapper extends Thread {
     private byte[] mBodyContent;
     private String mResponseBody;
 
+    public String getmResponseBody() {
+        return mResponseBody;
+    }
+
+    public HttpURLConnection getHttpConn() {
+        return httpConn;
+    }
+    
+    
+
+    
     private String mHttpMethod = null;
     private String mUrlCall = null;
     private OnCompletion mListener = null;
@@ -101,14 +112,16 @@ public class HttpWrapper extends Thread {
             httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod(mHttpMethod);
             httpConn.setDoOutput(true);
+            
 
             if (mBodyContent != null && mHttpMethod == HTTP_METHOD_POST) {
                 outStream = new BufferedOutputStream(httpConn.getOutputStream());
                 outStream.write(mBodyContent);
                 outStream.flush();
             }
-
+            
             mResponseBody = streamToString(httpConn.getInputStream());
+            
 
         } catch (ProtocolException e) {
             e.printStackTrace();

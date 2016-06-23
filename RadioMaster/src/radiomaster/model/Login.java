@@ -9,7 +9,7 @@ package radiomaster.model;
  *
  * @author Gauss Developer
  */
-public class Login {
+public class Login  {
     
     private int id;
     private String username;

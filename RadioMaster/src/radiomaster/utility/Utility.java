@@ -25,7 +25,7 @@ public class Utility {
         frame.setLocation(x, y);
     }
     
-    public static void greska(JFrame frame,String poruka){
+    public static void error (JFrame frame,String poruka){
         JOptionPane.showMessageDialog(
                     frame.getRootPane(), //prozor koji ga zove
                     poruka, //prikazani tekst

@@ -6,19 +6,9 @@
 package radiomaster.view;
 
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import radiomaster.restful.HttpWrapper;
+import static radiomaster.restful.HttpWrapper.REGISTER_URL;
 import radiomaster.utility.Utility;
 
 /**
@@ -30,14 +20,13 @@ public class Register extends javax.swing.JFrame {
     /**
      * Creates new form Register
      */
-    public Register() throws MalformedURLException, UnsupportedEncodingException, IOException {
+    public Register() {
         initComponents();
         Utility.center(this);
         setResizable(false);
         getContentPane().setBackground(Color.white);
         setTitle("New Account");
 
-        
     }
 
     /**
@@ -143,48 +132,23 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        // TODO add your handling code here:
-        
-        try {
-            // TODO add your handling code here:
-            URL url = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/user/register");
-            Map<String, Object> params = new LinkedHashMap<>();
-            
-            params.put("username", txtUsername.getText());
-            params.put("email", txtEmail.getText());
-            params.put("password", String.valueOf(txtPassword.getPassword()));
 
-            StringBuilder postData = new StringBuilder();
-            for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (postData.length() != 0) {
-                    postData.append('&');
-                }
-                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                postData.append('=');
-                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-            }
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            conn.getOutputStream().write(postDataBytes);
-
-            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-            for (int c; (c = in.read()) >= 0;) {
-                System.out.print((char) c);
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        if (!kontrola()) {
+            return;
         }
+
+        HttpWrapper wrapper = new HttpWrapper();
+        String postdata = "username=" + txtUsername.getText() + "&" + "email=" + txtEmail.getText() + "&" + "password=" + String.valueOf(txtPassword.getPassword());
+        byte[] bodyContent = postdata.getBytes();
+
+        wrapper.setURL(REGISTER_URL)
+                .setMethod("POST")
+                .setBody(bodyContent);
+
+        wrapper.run();
+
         this.dispose();
+
     }//GEN-LAST:event_btnSignInActionPerformed
 
     /**
@@ -201,4 +165,25 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private boolean kontrola() {
+        if (txtUsername.getText().trim().length() == 0) {
+            Utility.error(this, "Insert username");
+            txtUsername.requestFocus();
+            return false;
+        }
+
+        if (txtEmail.getText().trim().length() == 0) {
+            Utility.error(this, "Insert email in format example@example.com");
+            txtEmail.requestFocus();
+            return false;
+        }
+        if (new String(txtPassword.getPassword()).length() == 0) {
+            Utility.error(this, "Insert password");
+            txtPassword.requestFocus();
+            return false;
+        }
+        return true;
+
+    }
 }
