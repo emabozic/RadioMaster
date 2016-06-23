@@ -27,18 +27,11 @@ THE SOFTWARE.
 package radiomaster.view;
 
 import radiomaster.restful.HttpWrapper;
-import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
-import static radiomaster.restful.HttpWrapper.COUNTRIES_URL;
-import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.swing.JMenuItem;
-import radiomaster.model.model_categories;
-import radiomaster.restful.Response;
+import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
+import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 
 /**
  *
@@ -51,6 +44,7 @@ public class ViewGoran extends javax.swing.JFrame {
      ArrayList<String> categories;
      ArrayList<String> countries;
      JMenuItem jsubmenu;
+     
 
     
 
@@ -72,36 +66,15 @@ public class ViewGoran extends javax.swing.JFrame {
 //        httpreq.setMethod(HTTP_METHOD_GET);
 //        httpreq.run();
         
-        httpreq.setURL(CATEGORIES_URL);
-        httpreq.setMethod(HTTP_METHOD_GET);
-        httpreq.run();
-        
-  
-      
+       httpreq.setURL(CATEGORIES_URL);
+       httpreq.setMethod(HTTP_METHOD_GET);
+       httpreq.run();
 
-            
+
+
+        
           
 
-//            //System.out.println(sBuffer);
-//            java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
-//            }.getType();
-//
-//            Response<model_categories> odgovor = new Gson().fromJson(sBuffer.toString(), tip);
-//            
-//            
-//             for (model_categories item : odgovor.getContent()) {
-//                System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
-//                  categories.add(item.getTitle());
-//                
-//                
-//                 
-//             }
-//             for (int i =0; i<categories.size(); i++)
-//             {
-//             jsubmenu = new JMenuItem();
-//             jsubmenu.setText(categories.get(i));
-//             jMenu2.add(jsubmenu);
-//             }
     }
 
     /**
