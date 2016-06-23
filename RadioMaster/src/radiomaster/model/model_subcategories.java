@@ -32,7 +32,7 @@ package radiomaster.model;
  */
 
 
-public class model_subcategories extends model_categories {
+public class model_subcategories {
     
     private int id;
     private int parent_id;

@@ -36,10 +36,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.ButtonGroup;
 import javax.swing.JMenuBar;
 import javax.swing.KeyStroke;
-import javax.swing.ImageIcon;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -124,6 +122,13 @@ public class proba_jmenu extends javax.swing.JFrame {
         menuItem = new JMenuItem("Another item");
         submenu.add(menuItem);
         menu.add(submenu);
+        
+        submenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new view_categories().setVisible(true);
+            }
+        });
 
         //Build second menu in the menu bar.
 //        menu = new JMenu("Another Menu");

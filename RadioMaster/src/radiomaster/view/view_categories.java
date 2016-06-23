@@ -22,105 +22,103 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-
 package radiomaster.view;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import radiomaster.model.model_categories;
 import radiomaster.model.model_subcategories;
+import radiomaster.restful.HttpWrapper;
+import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
+import static radiomaster.restful.HttpWrapper.CATEGORIES_sub_URL;
+import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 import radiomaster.restful.Response;
 
 /**
  *
  * @author Ema
  */
+public class view_categories extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
-
-public class view_categories extends javax.swing.JFrame {
-    
     ArrayList<String> categories;
     ArrayList<String> subcategories;
     JMenuItem jsubmenu;
-//    JTextArea output;
-//    JScrollPane scrollPane;
-//    JMenuBar menuBar;
-//    JMenu menu, submenu;
-//    JMenuItem menuItem;
+    ArrayList<String> id;
+    int parent_id;
+
     /**
      * Creates new form view_categories
      */
     public view_categories() {
         initComponents();
-
+        id = new ArrayList<>();
         categories = new ArrayList<>();
         subcategories = new ArrayList<>();
         jmenu.setText("Countries");
         jmenu1.setText("Categories");
 
-         URL radiomaster;
-        //paziti pa postaviti header
-        try {
-            radiomaster = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/categories/list");
+        HttpWrapper wrapper = new HttpWrapper();
+        
 
-            HttpURLConnection yc = (HttpURLConnection) radiomaster.openConnection();
-            //provjeriti kasnije ima li header
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            yc.getInputStream()));
-            String inputLine;
-            StringBuffer sBuffer = new StringBuffer();
+        wrapper.setURL(CATEGORIES_URL)
+                //                .setOnCompletionListener(this)
+                .setMethod(HTTP_METHOD_GET);
+        wrapper.run();
 
-            while ((inputLine = in.readLine()) != null) {
-                sBuffer.append(inputLine);
+        java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
+        }.getType();
+
+        Response<model_categories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
+
+        for (model_categories item : odgovor.getContent()) {
+//            System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
+            categories.add(item.getTitle());
+            id.add(String.valueOf(item.getId()));
+
+        }
+
+        for (int i = 0; i < categories.size(); i++) {
+            jsubmenu = new JMenuItem();
+            jsubmenu.setText(categories.get(i));
+           
+            jmenu1.add(jsubmenu);
+            
+            jsubmenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                 for(int i=0; i<id.size();i++)
+                    new view_subcategory(id.get(i)).setVisible(true);
+
+                
             }
-
-            in.close();
-
-            //System.out.println(sBuffer);
-            java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
-            }.getType();
-
-            Response<model_categories> odgovor = new Gson().fromJson(sBuffer.toString(), tip);
-            
-            
-             for (model_categories item : odgovor.getContent()) {
-                System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
-                  categories.add(item.getTitle());
-                 
-             }
-             for (int i =0; i<categories.size(); i++)
-             {
-             jsubmenu = new JMenuItem();
-             jsubmenu.setText(categories.get(i));
-             jmenu1.add(jsubmenu);
-             }
-  
+        });
         }
-        catch (MalformedURLException ex) {
-            Logger.getLogger(view_categories.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(view_categories.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-      
-        
-   
-    }
-    
-    
 
+//        jsubmenu.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                new proba_jmenu().setVisible(true);
+//                for (int i = 1; i < id.size(); i++) {
+//                    wrapper_s.setURL(CATEGORIES_sub_URL + id.get(i))
+//                            .setMethod(HTTP_METHOD_GET);
+//                    wrapper_s.run();
+//                    java.lang.reflect.Type tip_s = new TypeToken<Response<model_subcategories>>() {
+//                    }.getType();
+//                    Response<model_subcategories> odgovor_s = new Gson().fromJson(wrapper_s.getmResponseBody(), tip_s);
+//                    for (model_subcategories item_s : odgovor_s.getContent()) {
+//                        parent_id = item_s.getParent_id();
+//                        System.out.println(item_s.getSlug());
+//                    }
+//
+//                }
+            }
+//        });
+//
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,28 +129,25 @@ public class view_categories extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jmenubar = new javax.swing.JMenuBar();
         jmenu = new javax.swing.JMenu();
         jmenu1 = new javax.swing.JMenu();
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jmenubar.add(jmenu);
-
-        jmenu1.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
-            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
-                jmenu1MenuKeyPressed(evt);
-            }
-            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt) {
-            }
-            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
-            }
-        });
-        jmenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmenu1ActionPerformed(evt);
-            }
-        });
         jmenubar.add(jmenu1);
 
         setJMenuBar(jmenubar);
@@ -171,24 +166,25 @@ public class view_categories extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenu1ActionPerformed
-                
-     
-    }//GEN-LAST:event_jmenu1ActionPerformed
-
-    private void jmenu1MenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_jmenu1MenuKeyPressed
-             
-
-    }//GEN-LAST:event_jmenu1MenuKeyPressed
-
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu jmenu;
     private javax.swing.JMenu jmenu1;
     public static javax.swing.JMenuBar jmenubar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onSuccess(String successBody) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
+    @Override
+    public void onError(String error) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
