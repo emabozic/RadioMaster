@@ -67,6 +67,10 @@ public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompl
 //        httpreq.setURL(CATEGORIES_URL);
 //        httpreq.setMethod(HTTP_METHOD_GET);
 //        httpreq.run();
+
+
+
+
     }
 
     /**
@@ -127,7 +131,8 @@ public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompl
     public void onSuccess(String successBody) {
             java.lang.reflect.Type tip1 = new TypeToken<Response<model_countries>>() {
         }.getType();
-        Response<model_countries> odgovor1 = new Gson().fromJson(httpreq1.mResponseBody, tip1);
+          Response<model_countries> odgovor1 = new Gson().fromJson(httpreq1.mResponseBody, tip1);
+   //       Response<model_countries> odgovor1 = new Gson().fromJson(, tip1);
         for (model_countries item : odgovor1.getContent()) {
             System.out.println("title: " + item.getRegion());
 
