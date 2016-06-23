@@ -27,10 +27,6 @@ package radiomaster.view;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,17 +36,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 import radiomaster.model.model_categories;
+import radiomaster.model.model_subcategories;
 import radiomaster.restful.Response;
 
 /**
@@ -62,6 +50,7 @@ import radiomaster.restful.Response;
 public class view_categories extends javax.swing.JFrame {
     
     ArrayList<String> categories;
+    ArrayList<String> subcategories;
     JMenuItem jsubmenu;
 //    JTextArea output;
 //    JScrollPane scrollPane;
@@ -75,14 +64,10 @@ public class view_categories extends javax.swing.JFrame {
         initComponents();
 
         categories = new ArrayList<>();
+        subcategories = new ArrayList<>();
         jmenu.setText("Countries");
         jmenu1.setText("Categories");
-       
-        
-       
-      
-        
-        
+
          URL radiomaster;
         //paziti pa postaviti header
         try {
@@ -112,8 +97,6 @@ public class view_categories extends javax.swing.JFrame {
              for (model_categories item : odgovor.getContent()) {
                 System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
                   categories.add(item.getTitle());
-                
-                
                  
              }
              for (int i =0; i<categories.size(); i++)
@@ -123,11 +106,14 @@ public class view_categories extends javax.swing.JFrame {
              jmenu1.add(jsubmenu);
              }
   
-        } catch (MalformedURLException ex) {
+        }
+        catch (MalformedURLException ex) {
             Logger.getLogger(view_categories.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(view_categories.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
       
         
    
