@@ -89,12 +89,12 @@ public class view_categories extends javax.swing.JFrame {
 
             in.close();
 
-            System.out.println(sBuffer);
+            //System.out.println(sBuffer);
             java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
             }.getType();
 
             Response<model_categories> odgovor = new Gson().fromJson(sBuffer.toString(), tip);
-            
+           
             
              for (model_categories item : odgovor.getContent()) {
                 System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);

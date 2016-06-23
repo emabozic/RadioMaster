@@ -59,7 +59,7 @@ public class HttpWrapper extends Thread {
     private HttpURLConnection httpConn;
     private BufferedOutputStream outStream;
     private byte[] mBodyContent;
-    private String mResponseBody;
+    public String mResponseBody;
 
     private String mHttpMethod = null;
     private String mUrlCall = null;

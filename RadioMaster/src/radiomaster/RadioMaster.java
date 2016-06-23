@@ -5,6 +5,7 @@
  */
 package radiomaster;
 
+import java.io.IOException;
 import radiomaster.view.ViewGoran;
 import radiomaster.view.view_categories;
 
@@ -18,9 +19,9 @@ public class RadioMaster {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-   new view_categories().setVisible(true);
- //       new ViewGoran().setVisible(true);
+    public static void main(String[] args) throws IOException {
+   // new view_categories().setVisible(true);
+   new ViewGoran().setVisible(true);
     }
     
 }

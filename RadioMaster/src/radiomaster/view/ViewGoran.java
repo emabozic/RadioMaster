@@ -22,59 +22,51 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-
-
 package radiomaster.view;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import radiomaster.restful.HttpWrapper;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JMenuItem;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import radiomaster.model.model_countries;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
+import static radiomaster.restful.HttpWrapper.COUNTRIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
+import radiomaster.restful.Response;
 
 /**
  *
  * @author Goran
  */
+public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
+    ArrayList<String> categories;
+    ArrayList<String> countries;
 
-public class ViewGoran extends javax.swing.JFrame {
-    
-     ArrayList<String> categories;
-     ArrayList<String> countries;
-     JMenuItem jsubmenu;
-     
-
-    
-
-   
-        
-     /**
+    /**
      * Creates new form ViewGoran
      */
     public ViewGoran() throws IOException {
         initComponents();
         categories = new ArrayList<>();
         countries = new ArrayList<>();
-        jMenu1.setText("Countries");
-        jMenu2.setText("Categories");
-        
+
         HttpWrapper httpreq = new HttpWrapper();
+        HttpWrapper httpreq1 = new HttpWrapper();
+
+        httpreq1.setURL(COUNTRIES_URL);
+        httpreq1.setMethod(HTTP_METHOD_GET);
+        httpreq1.setOnCompletionListener(this);
+        httpreq1.run();
+
         
-//        httpreq.setURL(COUNTRIES_URL);
+
+//        httpreq.setURL(CATEGORIES_URL);
 //        httpreq.setMethod(HTTP_METHOD_GET);
 //        httpreq.run();
-        
-       httpreq.setURL(CATEGORIES_URL);
-       httpreq.setMethod(HTTP_METHOD_GET);
-       httpreq.run();
-
-
-
-        
-          
-
     }
 
     /**
@@ -86,17 +78,13 @@ public class ViewGoran extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("jMenu2");
-        jMenuBar1.add(jMenu2);
+        jScrollPane1.setViewportView(jList1);
 
         setJMenuBar(jMenuBar1);
 
@@ -104,11 +92,17 @@ public class ViewGoran extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(575, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -117,11 +111,37 @@ public class ViewGoran extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onError(String error) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onSuccess(String successBody) {
+            java.lang.reflect.Type tip1 = new TypeToken<Response<model_countries>>() {
+        }.getType();
+        Response<model_countries> odgovor1 = new Gson().fromJson(httpreq1.mResponseBody, tip1);
+        for (model_countries item : odgovor1.getContent()) {
+            System.out.println("title: " + item.getRegion());
+
+            countries.add(item.getName());
+
+        }
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        JList<String> list = new JList<>(model);
+
+        for (int i = 0; i < countries.size(); i++) {
+
+            model.addElement(countries.get(i));
+        }
+        jList1.setModel(model);
+    }
 }
