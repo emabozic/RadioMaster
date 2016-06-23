@@ -6,6 +6,10 @@
 package radiomaster.view;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.REGISTER_URL;
@@ -147,6 +151,27 @@ public class Register extends javax.swing.JFrame {
 
         wrapper.run();
 
+        
+//        try {
+//            int code = wrapper.getHttpConn().getResponseCode();
+//            System.out.println("code " + code);
+//            if(code!=200){
+//                JOptionPane.showMessageDialog(
+//                    getRootPane(), //prozor koji ga zove
+//                    "Invalid username or password", //prikazani tekst
+//                    "Error",//naslov
+//                    JOptionPane.ERROR_MESSAGE //vrsta poruke
+//                        );
+//                
+//            
+//            }else{
+//                System.out.println("sve ok");
+//            }
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//           
+//        }
         this.dispose();
 
     }//GEN-LAST:event_btnSignInActionPerformed

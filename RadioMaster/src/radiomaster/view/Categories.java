@@ -6,8 +6,10 @@
 package radiomaster.view;
 
 import radiomaster.restful.HttpWrapper;
+import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_sub_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
+import radiomaster.utility.Utility;
 
 /**
  *
@@ -20,10 +22,11 @@ public class Categories extends javax.swing.JFrame {
      */
     public Categories() {
         initComponents();
+        Utility.center(this);
         
         HttpWrapper wrapper = new HttpWrapper();
         
-        wrapper.setURL(CATEGORIES_sub_URL)
+        wrapper.setURL(CATEGORIES_URL)
                 .setMethod(HTTP_METHOD_GET);
         
         wrapper.run();
