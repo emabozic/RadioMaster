@@ -6,7 +6,7 @@
 package radiomaster;
 
 import radiomaster.view.view_categories;
-
+import radiomaster.view.ViewStations;
 /**
  *
  * @author Ema
@@ -17,7 +17,7 @@ public class RadioMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new view_categories().setVisible(true);
+        new ViewStations().setVisible(true);
     }
     
 }
