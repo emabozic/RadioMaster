@@ -9,7 +9,7 @@ package radiomaster.model;
  *
  * @author Ema
  */
-public class model_categories extends Datetime{
+public class Categories extends Datetime{
     
     private int id;
     private String title;

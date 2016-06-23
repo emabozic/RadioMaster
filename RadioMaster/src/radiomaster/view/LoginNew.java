@@ -6,31 +6,25 @@
 package radiomaster.view;
 
 import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import radiomaster.restful.HttpWrapper;
 import radiomaster.utility.Utility;
+import static radiomaster.restful.HttpWrapper.LOGIN_URL;
+
 
 /**
  *
  * @author Gauss Developer
  */
-public class Login extends javax.swing.JFrame {
+public class LoginNew extends javax.swing.JFrame {
 
     /**
      * Creates new form login
      */
-    public Login() {
+    public LoginNew() {
         initComponents();
         setTitle(Utility.APP_NAME);
         Utility.center(this);
@@ -39,6 +33,8 @@ public class Login extends javax.swing.JFrame {
 
         lblRegister.setForeground(Color.BLUE);
         lblForget.setForeground(Color.RED);
+        
+        
     }
 
     /**
@@ -153,55 +149,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
-            // TODO add your handling code here:
-            URL url = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/user/login");
-            Map<String, Object> params = new LinkedHashMap<>();
-
-            params.put("email", txtEmail.getText());
-            params.put("password", String.valueOf(txtPassword.getPassword()));
-
-            StringBuilder postData = new StringBuilder();
-            for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (postData.length() != 0) {
-                    postData.append('&');
-                }
-                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                postData.append('=');
-                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-            }
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            conn.getOutputStream().write(postDataBytes);
-
-            Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-            for (int c; (c = in.read()) >= 0;) {
-                System.out.print((char) c);
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
+        HttpWrapper wrapper = new HttpWrapper();
+        String postdata = "username=" + txtEmail.getText() + "&" + "password=" + String.valueOf(txtPassword.getPassword());
+        byte[] bodyContent = postdata.getBytes();
+        
+        wrapper.setURL(LOGIN_URL)
+                .setMethod("POST")
+                .setBody(bodyContent);
+        
+        wrapper.run();
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
-        try {
-            new Register().setVisible(true);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_lblRegisterMouseClicked
 
     /**
