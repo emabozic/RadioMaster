@@ -17,6 +17,7 @@ public class RadioMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        new view_countries().setVisible(true);
         new view_categories().setVisible(true);
     }
     

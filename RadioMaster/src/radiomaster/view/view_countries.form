@@ -2,18 +2,25 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Menu class="javax.swing.JMenuBar" name="jmenubar">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-      </AuxValues>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jmenu">
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jmenu1">
+        <Menu class="javax.swing.JMenu" name="jmCountries">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Countries"/>
+          </Properties>
           <Events>
-            <EventHandler event="menuKeyPressed" listener="javax.swing.event.MenuKeyListener" parameters="javax.swing.event.MenuKeyEvent" handler="jmenu1MenuKeyPressed"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenu1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCountriesActionPerformed"/>
           </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmCategories">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Categories"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmStations">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Stations"/>
+          </Properties>
         </Menu>
       </SubComponents>
     </Menu>
@@ -22,7 +29,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jmenubar"/>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
