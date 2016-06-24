@@ -5,7 +5,8 @@
  */
 package radiomaster;
 
-import radiomaster.view.view_categories;
+import radiomaster.view.Login;
+import radiomaster.view.ViewCategories;
 
 /**
  *
@@ -17,7 +18,8 @@ public class RadioMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new view_categories().setVisible(true);
+//        new view_countries().setVisible(true);
+        new Login().setVisible(true);
     }
     
 }
