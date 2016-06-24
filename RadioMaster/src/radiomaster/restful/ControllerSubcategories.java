@@ -31,7 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 import static jdk.nashorn.internal.runtime.Debug.id;
-import radiomaster.model.model_subcategories;
+import radiomaster.model.ModelSubcategories;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_sub_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 
@@ -41,16 +41,16 @@ import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
  */
 
 
-public class controller_subcategories {
-    List<model_subcategories> subcategories = new ArrayList<>();
-    model_subcategories msc;
-    controller_categories cc;
+public class ControllerSubcategories {
+    List<ModelSubcategories> subcategories = new ArrayList<>();
+    ModelSubcategories msc;
+    ControllerCategories cc;
     List<String> id_c;
-    public controller_subcategories(){
-        cc = new controller_categories();
+    public ControllerSubcategories(){
+        cc = new ControllerCategories();
         id_c = cc.getId();
     }
-    public List<model_subcategories> getSubcategories(){
+    public List<ModelSubcategories> getSubcategories(){
         HttpWrapper wrapper = new HttpWrapper();
         for (int i=1; i<16; i++){
             
@@ -58,15 +58,15 @@ public class controller_subcategories {
                 .setMethod(HTTP_METHOD_GET);
         wrapper.run();
 
-        java.lang.reflect.Type tip = new TypeToken<Response<model_subcategories>>() {
+        java.lang.reflect.Type tip = new TypeToken<Response<ModelSubcategories>>() {
         }.getType();
 
-        Response<model_subcategories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
+        Response<ModelSubcategories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
         
-        for (model_subcategories item : odgovor.getContent()) {
+        for (ModelSubcategories item : odgovor.getContent()) {
 //            System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
 //            categories.add(item);
-              msc = new model_subcategories();
+              msc = new ModelSubcategories();
               msc.setId(item.getId());
               msc.setParent_id(item.getParent_id());
               msc.setTitle(item.getTitle());

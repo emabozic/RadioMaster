@@ -48,6 +48,7 @@ public class HttpWrapper extends Thread {
     public static final String CATEGORIES_sub_URL = BASE_URL + "categories/list/sub/";
     public static final String REGISTER_URL = BASE_URL + "user/register";
     public static final String LOGIN_URL = BASE_URL + "user/login";
+    public static final String STATIONS_URL = BASE_URL + "stations/filter/country/";
 
     public static final String HTTP_METHOD_GET = "GET";
     public static final String HTTP_METHOD_POST = "POST";
@@ -165,7 +166,7 @@ public class HttpWrapper extends Thread {
         }
 
         if (mResponseBody != null) {
-            System.out.println("OUTPUT" + mResponseBody);
+//            System.out.println("OUTPUT" + mResponseBody);
 
             if (mListener != null) {
                 mListener.onSuccess(mResponseBody);

@@ -29,7 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
-import radiomaster.model.model_categories;
+import radiomaster.model.ModelCategories;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 
@@ -39,16 +39,16 @@ import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
  */
 
 
-public class controller_categories {
+public class ControllerCategories {
     
-    List<model_categories> categories = new ArrayList<>();
-    model_categories mc;
-    model_categories kategorije;
+    List<ModelCategories> categories = new ArrayList<>();
+    ModelCategories mc;
+    ModelCategories kategorije;
     List<String> id;
 
    
     
-    public List<model_categories> getCategories(){
+    public List<ModelCategories> getCategories(){
         HttpWrapper wrapper = new HttpWrapper();
         id = new ArrayList<>();
 
@@ -57,15 +57,15 @@ public class controller_categories {
                 .setMethod(HTTP_METHOD_GET);
         wrapper.run();
 
-        java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
+        java.lang.reflect.Type tip = new TypeToken<Response<ModelCategories>>() {
         }.getType();
 
-        Response<model_categories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
+        Response<ModelCategories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
 
-        for (model_categories item : odgovor.getContent()) {
+        for (ModelCategories item : odgovor.getContent()) {
 //            System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
 //            categories.add(item);
-              mc = new model_categories();
+              mc = new ModelCategories();
               mc.setId(item.getId());
               mc.setTitle(item.getTitle());
               mc.setCreated_at(item.getCreated_at());
@@ -86,12 +86,12 @@ public class controller_categories {
                 .setMethod(HTTP_METHOD_GET);
         wrapper.run();
 
-        java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
+        java.lang.reflect.Type tip = new TypeToken<Response<ModelCategories>>() {
         }.getType();
 
-        Response<model_categories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
+        Response<ModelCategories> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
 
-        for (model_categories item : odgovor.getContent()) {
+        for (ModelCategories item : odgovor.getContent()) {
             id.add(String.valueOf(item.getId()));
         }
         

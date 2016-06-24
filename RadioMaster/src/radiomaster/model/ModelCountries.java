@@ -32,15 +32,15 @@ package radiomaster.model;
  */
 
 
-public class model_subcategories {
+public class ModelCountries {
     
-    private int id;
-    private int parent_id;
-    private String title;
-    private String description;
-    private date_time created_at;
-    private date_time updated_at;
-    private String slug;
+     private int id;
+    private int stations_count;
+    private String name;
+    private String country_code;
+    private String region;
+    private String subregion;
+    private String flag_img_url;
 
     public int getId() {
         return id;
@@ -50,57 +50,52 @@ public class model_subcategories {
         this.id = id;
     }
 
-    public int getParent_id() {
-        return parent_id;
+    public int getStations_count() {
+        return stations_count;
     }
 
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
+    public void setStations_count(int stations_count) {
+        this.stations_count = stations_count;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCountry_code() {
+        return country_code;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCountry_code(String country_code) {
+        this.country_code = country_code;
     }
 
-    public date_time getCreated_at() {
-        return created_at;
+    public String getRegion() {
+        return region;
     }
 
-    public void setCreated_at(date_time created_at) {
-        this.created_at = created_at;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public date_time getUpdated_at() {
-        return updated_at;
+    public String getSubregion() {
+        return subregion;
     }
 
-    public void setUpdated_at(date_time updated_at) {
-        this.updated_at = updated_at;
+    public void setSubregion(String subregion) {
+        this.subregion = subregion;
     }
 
-    public String getSlug() {
-        return slug;
+    public String getFlag_img_url() {
+        return flag_img_url;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-    
-      @Override
-    public String toString() {
-        return getTitle(); //To change body of generated methods, choose Tools | Templates.
+    public void setFlag_img_url(String flag_img_url) {
+        this.flag_img_url = flag_img_url;
     }
     
     

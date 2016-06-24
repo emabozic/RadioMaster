@@ -29,48 +29,48 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
-import radiomaster.model.model_categories;
-import radiomaster.model.model_subcategories;
+import radiomaster.model.ModelCategories;
+import radiomaster.model.ModelSubcategories;
 import radiomaster.restful.HttpWrapper;
-import radiomaster.restful.controller_categories;
-import radiomaster.restful.controller_subcategories;
+import radiomaster.restful.ControllerCategories;
+import radiomaster.restful.ControllerSubcategories;
 
 /**
  *
  * @author Ema
  */
-public class view_categories extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
+public class ViewCategories extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
     ArrayList<String> categories;
     ArrayList<String> subcategories;
     JMenuItem jsubmenu;
     ArrayList<String> id;
-    controller_categories cc;
-    controller_subcategories cs;
+    ControllerCategories cc;
+    ControllerSubcategories cs;
     int parent_id;
-    List<model_categories> osnovniPodaciKategorije;
-    List<model_subcategories> osnovniPodaciPodkategorije;
-    model_categories mc;
-    model_subcategories msc;
-    DefaultListModel<model_categories> model;
-    DefaultListModel<model_subcategories> models;
+    List<ModelCategories> osnovniPodaciKategorije;
+    List<ModelSubcategories> osnovniPodaciPodkategorije;
+    ModelCategories mc;
+    ModelSubcategories msc;
+    DefaultListModel<ModelCategories> model;
+    DefaultListModel<ModelSubcategories> models;
 
     /**
      * Creates new form view_categories
      */
-    public view_categories() {
+    public ViewCategories() {
         initComponents();
         id = new ArrayList<>();
         categories = new ArrayList<>();
-        cc = new controller_categories();
-        cs = new controller_subcategories();
+        cc = new ControllerCategories();
+        cs = new ControllerSubcategories();
         napuniListu();
         napuniListuSub();
         
 
         model = new DefaultListModel<>();
   
-        for (model_categories mc : osnovniPodaciKategorije) {
+        for (ModelCategories mc : osnovniPodaciKategorije) {
 
             model.addElement(mc);
         }
@@ -113,7 +113,7 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jListCat.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -190,12 +190,12 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
             return;
         }
        
-        mc = (model_categories) jListCat.getSelectedValue();
+        mc = (ModelCategories) jListCat.getSelectedValue();
        
         
         models = new DefaultListModel<>();
         
-        for (model_subcategories msc : osnovniPodaciPodkategorije) {
+        for (ModelSubcategories msc : osnovniPodaciPodkategorije) {
             if(mc.getId() == msc.getParent_id()){
             models.addElement(msc);
             }
