@@ -52,6 +52,8 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
     List<model_subcategories> osnovniPodaciPodkategorije;
     model_categories mc;
     model_subcategories msc;
+    DefaultListModel<model_categories> model;
+    DefaultListModel<model_subcategories> models;
 
     /**
      * Creates new form view_categories
@@ -67,7 +69,7 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
         jmenu.setText("Countries");
         jmenu1.setText("Categories");
 
-        DefaultListModel<model_categories> model = new DefaultListModel<>();
+        model = new DefaultListModel<>();
   
         for (model_categories mc : osnovniPodaciKategorije) {
 
@@ -75,13 +77,8 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
         }
         jListCat.setModel(model);
         
-        DefaultListModel<model_subcategories> models = new DefaultListModel<>();
         
-        for (model_subcategories msc : osnovniPodaciPodkategorije) {
-            models.addElement(msc);
-   
-        }
-        
+  //        txtproba.setText(msc.getTitle());
    
         
     
@@ -102,7 +99,8 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
         jScrollPane1 = new javax.swing.JScrollPane();
         jListCat = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
-        txtSub = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstSubC = new javax.swing.JList();
         jmenubar = new javax.swing.JMenuBar();
         jmenu = new javax.swing.JMenu();
         jmenu1 = new javax.swing.JMenu();
@@ -146,6 +144,13 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
 
         jLabel1.setText("Subcategory");
 
+        lstSubC.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { " " };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lstSubC);
+
         jmenubar.add(jmenu);
         jmenubar.add(jmenu1);
 
@@ -161,8 +166,8 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(txtSub, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +178,7 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -186,16 +191,23 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
         }
        
         mc = (model_categories) jListCat.getSelectedValue();
-        txtSub.setText(String.valueOf(mc.getId()));
+       
+        
+        models = new DefaultListModel<>();
+        
+        for (model_subcategories msc : osnovniPodaciPodkategorije) {
+            if(mc.getId() == msc.getParent_id()){
+            models.addElement(msc);
+            }
+        }
+        lstSubC.setModel(models);
+        
+        
         
 //        System.out.println(msc.getParent_id());
             
 
-            if(mc.getId() == msc.getParent_id())
-            {
-                txtSub.setText(msc.getTitle());
-            }
-        
+           
         
         
         
@@ -212,10 +224,11 @@ public class view_categories extends javax.swing.JFrame implements HttpWrapper.O
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenu jmenu;
     private javax.swing.JMenu jmenu1;
     public static javax.swing.JMenuBar jmenubar;
-    private javax.swing.JTextField txtSub;
+    private javax.swing.JList lstSubC;
     // End of variables declaration//GEN-END:variables
 
     @Override

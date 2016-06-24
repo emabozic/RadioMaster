@@ -98,7 +98,10 @@ public class model_subcategories {
         this.slug = slug;
     }
     
-    
+      @Override
+    public String toString() {
+        return getTitle(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

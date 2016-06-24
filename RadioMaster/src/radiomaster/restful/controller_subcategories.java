@@ -52,9 +52,9 @@ public class controller_subcategories {
     }
     public List<model_subcategories> getSubcategories(){
         HttpWrapper wrapper = new HttpWrapper();
-        for (int i=1; i<id_c.size(); i++){
-        wrapper.setURL(CATEGORIES_sub_URL + id_c.get(i))
-                //                .setOnCompletionListener(this)
+        for (int i=1; i<16; i++){
+            
+        wrapper.setURL(CATEGORIES_sub_URL + i)
                 .setMethod(HTTP_METHOD_GET);
         wrapper.run();
 
@@ -79,4 +79,6 @@ public class controller_subcategories {
         return subcategories;
        
 }
+
+
 }
