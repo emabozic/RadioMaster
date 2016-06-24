@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileVisitResult;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ import static radiomaster.restful.HttpWrapper.LOGIN_URL;
  */
 public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
+    HttpWrapper wrapper;
     /**
      * Creates new form login
      */
@@ -157,7 +159,7 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
             return;
         }
         
-        HttpWrapper wrapper = new HttpWrapper();
+        wrapper = new HttpWrapper();
         String postdata = "email=" + txtEmail.getText() + "&" + "password=" + String.valueOf(txtPassword.getPassword());
         byte[] bodyContent = postdata.getBytes();
 
@@ -168,35 +170,37 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
                 
 
         wrapper.run();
+//        InputStream error = wrapper.getHttpConn().getErrorStream();
+//        System.out.println(error);
 
-        try {
-            int code = wrapper.getHttpConn().getResponseCode();
-            System.out.println("code " + code);
-            if(code!=200){
-                JOptionPane.showMessageDialog(
-                    getRootPane(), //prozor koji ga zove
-                    "Invalid username or password", //prikazani tekst
-                    "Error",//naslov
-                    JOptionPane.ERROR_MESSAGE //vrsta poruke
-                        );
-                
-            
-            }else{
-                new Categories().setVisible(true);
-                this.dispose();
-            }
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-           
-        }
-     
-                
+//        try {
+//            int code = wrapper.getHttpConn().getResponseCode();
+//            System.out.println("code " + code);
+//            if(code!=200){
+//                JOptionPane.showMessageDialog(
+//                    getRootPane(), //prozor koji ga zove
+//                    "Invalid email or password", //prikazani tekst
+//                    "Error",//naslov
+//                    JOptionPane.ERROR_MESSAGE //vrsta poruke
+//                        );
+//                
+//            
+//            }else{
+//                new Categories().setVisible(true);
+//                this.dispose();
+//            }
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//           
+//     
+//        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
         new Register().setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_lblRegisterMouseClicked
 
@@ -234,16 +238,46 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
 
     @Override
     public void onSuccess(String successBody) {
+        
+        new Categories().setVisible(true);
+        this.dispose();
+        
         System.out.println("Successful login");
 
     }
 
     @Override
     public void onError(String error) {
+        
+//       error = String.valueOf(wrapper.getHttpConn().getErrorStream());
+//        System.out.println(error);
+//        
+//        System.setProperty("keep alive", error);
 
         System.out.println("Invalid username or password");
         
+//        try {
+//                int code = wrapper.getHttpConn().getResponseCode();
+//                if (code>200){
+//                   
+//                }
+//                //InputStream es = wrapper.getHttpConn().getErrorStream();
+//                        
+//             System.out.println("bla bla "+ es);
+//                // close the errorstrem
+//                es.close();
+//        } catch(IOException ex) {
+//                // deal with the exception
+//        }
 
+        JOptionPane.showMessageDialog(
+                    getRootPane(), //prozor koji ga zove
+                    "Invalid email or password", //prikazani tekst
+                    "Error",//naslov
+                    JOptionPane.ERROR_MESSAGE //vrsta poruke
+                        );
+        
+        
     }
 
 }

@@ -19,7 +19,7 @@ import radiomaster.utility.Utility;
  *
  * @author Gauss Developer
  */
-public class Register extends javax.swing.JFrame {
+public class Register extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
     /**
      * Creates new form Register
@@ -147,6 +147,7 @@ public class Register extends javax.swing.JFrame {
 
         wrapper.setURL(REGISTER_URL)
                 .setMethod("POST")
+                .setOnCompletionListener(this)
                 .setBody(bodyContent);
 
         wrapper.run();
@@ -172,7 +173,7 @@ public class Register extends javax.swing.JFrame {
 //            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 //           
 //        }
-        this.dispose();
+        //this.dispose();
 
     }//GEN-LAST:event_btnSignInActionPerformed
 
@@ -210,5 +211,17 @@ public class Register extends javax.swing.JFrame {
         }
         return true;
 
+    }
+
+    @Override
+    public void onSuccess(String successBody) {
+        new Login().setVisible(true);
+        this.dispose();
+    }
+
+    @Override
+    public void onError(String error) {
+        
+        
     }
 }

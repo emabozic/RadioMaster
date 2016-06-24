@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -113,6 +112,7 @@ public class HttpWrapper extends Thread {
             httpConn.setRequestMethod(mHttpMethod);
             httpConn.setDoOutput(true);
             
+            
 
             if (mBodyContent != null && mHttpMethod == HTTP_METHOD_POST) {
                 outStream = new BufferedOutputStream(httpConn.getOutputStream());
@@ -127,16 +127,20 @@ public class HttpWrapper extends Thread {
             e.printStackTrace();
             if (mListener != null) {
                 mListener.onError("error");
+                //System.out.println("protocol exception");
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
             if (mListener != null) {
                 mListener.onError("error");
+                //System.out.println("malformed url exception");
             }
         } catch (IOException e) {
             e.printStackTrace();
             if (mListener != null) {
                 mListener.onError("error");
+                //System.out.println("IOException");
+                
             }
         } finally {
             try {
@@ -147,6 +151,7 @@ public class HttpWrapper extends Thread {
                 e.printStackTrace();
                 if (mListener != null) {
                     mListener.onError("error");
+                    
                 }
             }
 
