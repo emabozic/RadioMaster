@@ -28,6 +28,7 @@ package radiomaster.view;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
 import radiomaster.model.model_subcategories;
 import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_sub_URL;
@@ -41,25 +42,29 @@ import radiomaster.restful.Response;
 
 
 public class view_subcategory extends javax.swing.JFrame {
-
+    ArrayList<String> subcategories;
     /**
      * Creates new form view_subcategory
      */
-    public view_subcategory(String id) {
+    public view_subcategory(ArrayList<String> id) {
         initComponents();
-        System.out.println("id" + id);
+       
+        subcategories = new ArrayList<>();
         HttpWrapper wrapper_s = new HttpWrapper();
-        
-        wrapper_s.setURL(CATEGORIES_sub_URL + (String.valueOf(id)))
+        for(int i=1; i<id.size();i++){
+        wrapper_s.setURL(CATEGORIES_sub_URL + id.get(i))
                             .setMethod(HTTP_METHOD_GET);
+                             wrapper_s.run();
                     java.lang.reflect.Type tip_s = new TypeToken<Response<model_subcategories>>() {
                     }.getType();
                     Response<model_subcategories> odgovor_s = new Gson().fromJson(wrapper_s.getmResponseBody(), tip_s);
                     for (model_subcategories item_s : odgovor_s.getContent()) {
-                       
-                        System.out.println(item_s.getSlug());
+                      if(item_s.getParent_id()== 1)
+                      {
+                          System.out.println("JEEEEEEEEE");
+                      }
                     }
-    }
+    }}
 
     /**
      * This method is called from within the constructor to initialize the form.

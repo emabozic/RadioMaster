@@ -17,6 +17,7 @@ public class model_categories {
     private date_time created_at;
     private date_time updated_at;
     private String slug;
+    
 
     public int getId() {
         return id;
