@@ -38,12 +38,11 @@ import radiomaster.restful.CountriesController;
  */
 public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
-   ArrayList<String> countries;
-   DefaultListModel<ModelCountries> model;
-   List<ModelCountries> modelCountries;
-   CountriesController cc;
-   ModelCountries mc;
-
+    ArrayList<String> countries;
+    DefaultListModel<ModelCountries> model;
+    List<ModelCountries> modelCountries;
+    CountriesController cc;
+    ModelCountries mc;
 
     /**
      * Creates new form ViewGoran
@@ -54,18 +53,16 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
         cc = new CountriesController();
         napuniCountries();
 
-
         model = new DefaultListModel<>();
-  
+
         for (ModelCountries mc : modelCountries) {
 
             model.addElement(mc);
         }
         jList1.setModel(model);
-      
- this.modelCountries = cc.getCountries();
- 
- 
+
+        this.modelCountries = cc.getCountries();
+
     }
 
     /**
@@ -139,11 +136,11 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
 
     @Override
     public void onSuccess(String successBody) {
-        
+
     }
-    
-                   private void napuniCountries() {
-         this.modelCountries = cc.getCountries();
+
+    private void napuniCountries() {
+        this.modelCountries = cc.getCountries();
 
     }
 }
