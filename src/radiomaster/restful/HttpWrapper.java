@@ -1,19 +1,15 @@
 /*
  * /**
 license The MIT License
-
 Copyright (c) 2012-2016 Gauss, www.gauss.hr
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -49,9 +45,10 @@ public class HttpWrapper extends Thread {
 
     public static final String COUNTRIES_URL = BASE_URL + "countries/list";
     public static final String CATEGORIES_URL = BASE_URL + "categories/list";
-    public static final String CATEGORIES_sub_URL = BASE_URL + "categories/list/sub/{categoryID}";
+    public static final String CATEGORIES_sub_URL = BASE_URL + "categories/list/sub/";
     public static final String REGISTER_URL = BASE_URL + "user/register";
     public static final String LOGIN_URL = BASE_URL + "user/login";
+    public static final String STATIONS_URL = BASE_URL + "stations/filter/country/";
 
     public static final String HTTP_METHOD_GET = "GET";
     public static final String HTTP_METHOD_POST = "POST";
@@ -60,6 +57,10 @@ public class HttpWrapper extends Thread {
     private BufferedOutputStream outStream;
     private byte[] mBodyContent;
     public String mResponseBody;
+
+    public String getmResponseBody() {
+        return mResponseBody;
+    }
 
     private String mHttpMethod = null;
     private String mUrlCall = null;
@@ -115,7 +116,7 @@ public class HttpWrapper extends Thread {
     //region THREAD METHODS
     @Override
     public void run() {
-        System.out.println("OUTPUT " + "new thread http execution: " + mUrlCall);
+//        System.out.println("OUTPUT " + "new thread http execution: " + mUrlCall);
 
         super.run();
         try {
@@ -165,7 +166,7 @@ public class HttpWrapper extends Thread {
         }
 
         if (mResponseBody != null) {
-            System.out.println("OUTPUT" + mResponseBody);
+//            System.out.println("OUTPUT" + mResponseBody);
 
             if (mListener != null) {
                 mListener.onSuccess(mResponseBody);

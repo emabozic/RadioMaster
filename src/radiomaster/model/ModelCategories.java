@@ -9,14 +9,15 @@ package radiomaster.model;
  *
  * @author Ema
  */
-public class model_categories {
+public class ModelCategories {
     
     private int id;
     private String title;
     private String description;
-    private date_time created_at;
-    private date_time updated_at;
+    private DateTime created_at;
+    private DateTime updated_at;
     private String slug;
+    
 
     public int getId() {
         return id;
@@ -42,19 +43,19 @@ public class model_categories {
         this.description = description;
     }
 
-    public date_time getCreated_at() {
+    public DateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(date_time created_at) {
+    public void setCreated_at(DateTime created_at) {
         this.created_at = created_at;
     }
 
-    public date_time getUpdated_at() {
+    public DateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(date_time updated_at) {
+    public void setUpdated_at(DateTime updated_at) {
         this.updated_at = updated_at;
     }
 

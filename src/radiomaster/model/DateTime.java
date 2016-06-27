@@ -36,7 +36,7 @@ import java.util.Date;
 
 
 
-public class date_time {
+public class DateTime {
     
     private String date;
     private int timezone_type;

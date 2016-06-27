@@ -24,32 +24,33 @@ THE SOFTWARE.
  */
 
 package radiomaster.view;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JMenuItem;
-import radiomaster.model.model_categories;
-import radiomaster.restful.Response;
+import radiomaster.restful.HttpWrapper;
+import static radiomaster.restful.HttpWrapper.STATIONS_URL;
+import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
+import radiomaster.model.Stations;
+import radiomaster.restful.Response2;
+import java.util.ArrayList;
+import com.google.gson.Gson;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.text.View;
+import radiomaster.restful.ControllerCategories;
+
 
 /**
  *
- * @author Ema
+ * @author Slaven Karakaš
+ * 
  */
 
 
-public class view_categories extends javax.swing.JFrame {
+public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
     
-    ArrayList<String> categories;
+    ArrayList<String> stations;
     JMenuItem jsubmenu;
+    String mData;
+    
 //    JTextArea output;
 //    JScrollPane scrollPane;
 //    JMenuBar menuBar;
@@ -58,69 +59,29 @@ public class view_categories extends javax.swing.JFrame {
     /**
      * Creates new form view_categories
      */
-    public view_categories() {
+     
+    
+    
+    
+    public ViewStations(){
         initComponents();
-
-        categories = new ArrayList<>();
-        jmenu.setText("Countries");
-        jmenu1.setText("Categories");
+ 
+        stations = new ArrayList<>();
+        //subcategories = new ArrayList<>();
+        jmenu.setText("Stations");
        
-        
-       
-      
-        
-        
-         URL radiomaster;
-        //paziti pa postaviti header
-        try {
-            radiomaster = new URL("http://radiomaster.gaussx.com/web/app_dev.php/api/categories/list");
-
-            HttpURLConnection yc = (HttpURLConnection) radiomaster.openConnection();
-            //provjeriti kasnije ima li header
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            yc.getInputStream()));
-            String inputLine;
-            StringBuffer sBuffer = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                sBuffer.append(inputLine);
-            }
-
-            in.close();
-
-            //System.out.println(sBuffer);
-            java.lang.reflect.Type tip = new TypeToken<Response<model_categories>>() {
-            }.getType();
-
-            Response<model_categories> odgovor = new Gson().fromJson(sBuffer.toString(), tip);
-           
-            
-             for (model_categories item : odgovor.getContent()) {
-                System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
-                  categories.add(item.getTitle());
-                
-                
-                 
-             }
-             for (int i =0; i<categories.size(); i++)
-             {
-             jsubmenu = new JMenuItem();
-             jsubmenu.setText(categories.get(i));
-             jmenu1.add(jsubmenu);
-             }
   
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(view_categories.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(view_categories.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+        HttpWrapper wrapper = new HttpWrapper();
         
-   
+       
+        wrapper.setURL(STATIONS_URL + "HR/5/0")
+                .setOnCompletionListener(this)
+                .setMethod(HTTP_METHOD_GET);
+        wrapper.run();  
     }
-    
-    
+
+   
+   
 
 
     /**
@@ -132,11 +93,15 @@ public class view_categories extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstStations = new javax.swing.JList<>();
         jmenubar = new javax.swing.JMenuBar();
         jmenu = new javax.swing.JMenu();
         jmenu1 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jScrollPane1.setViewportView(lstStations);
 
         jmenubar.add(jmenu);
 
@@ -162,21 +127,29 @@ public class view_categories extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(529, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenu1ActionPerformed
-
+                
+     
     }//GEN-LAST:event_jmenu1ActionPerformed
 
     private void jmenu1MenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_jmenu1MenuKeyPressed
+             
 
     }//GEN-LAST:event_jmenu1MenuKeyPressed
 
@@ -186,8 +159,34 @@ public class view_categories extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu jmenu;
     private javax.swing.JMenu jmenu1;
-    private javax.swing.JMenuBar jmenubar;
+    public static javax.swing.JMenuBar jmenubar;
+    private javax.swing.JList<String> lstStations;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onSuccess(String successBody) {   
+            Response2 odgovor= new Gson().fromJson(successBody,Response2.class);
+
+            for (Stations item : odgovor.getContent().getStations()) {
+                System.out.println("Station: " + item.getName());
+                stations.add(item.getName());
+            }  
+            DefaultListModel model = new DefaultListModel();
+                       JList <String> list = new JList<>(model);
+                       for (int i=0; i<stations.size();i++){
+                           model.addElement(stations.get(i));
+                       }
+          lstStations.setModel(model);
+          
+         
+           
+    }
+
+    @Override
+    public void onError(String error) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

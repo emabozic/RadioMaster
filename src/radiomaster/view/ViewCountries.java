@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import radiomaster.model.model_countries;
+import radiomaster.model.ModelCountries;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
 import static radiomaster.restful.HttpWrapper.COUNTRIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
@@ -41,7 +41,7 @@ import radiomaster.restful.Response;
  *
  * @author Goran
  */
-public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
+public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
     ArrayList<String> categories;
     ArrayList<String> countries;
@@ -49,7 +49,7 @@ public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompl
     /**
      * Creates new form ViewGoran
      */
-    public ViewGoran() throws IOException {
+    public ViewCountries() throws IOException {
         initComponents();
         categories = new ArrayList<>();
         countries = new ArrayList<>();
@@ -62,25 +62,7 @@ public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompl
         httpreq1.setOnCompletionListener(this);
         httpreq1.run();
 
-        java.lang.reflect.Type tip1 = new TypeToken<Response<model_countries>>() {
-        }.getType();
-        Response<model_countries> odgovor1 = new Gson().fromJson(httpreq1.mResponseBody, tip1);
-        //       Response<model_countries> odgovor1 = new Gson().fromJson(, tip1);
-        for (model_countries item : odgovor1.getContent()) {
-            System.out.println("title: " + item.getRegion());
-
-            countries.add(item.getName());
-
-        }
-
-        DefaultListModel<String> model = new DefaultListModel<>();
-        JList<String> list = new JList<>(model);
-
-        for (int i = 0; i < countries.size(); i++) {
-
-            model.addElement(countries.get(i));
-        }
-        jList1.setModel(model);
+      
 
 //        httpreq.setURL(CATEGORIES_URL);
 //        httpreq.setMethod(HTTP_METHOD_GET);
@@ -101,7 +83,7 @@ public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jList1 = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Countries"));
 
@@ -158,6 +140,26 @@ public class ViewGoran extends javax.swing.JFrame implements HttpWrapper.OnCompl
 
     @Override
     public void onSuccess(String successBody) {
+        
+          java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>() {
+        }.getType();
+        Response<ModelCountries> odgovor1 = new Gson().fromJson(successBody, tip1);
+
+        for (ModelCountries item : odgovor1.getContent()) {
+       //     System.out.println("title: " + item.getRegion());
+
+            countries.add(item.getName());
+
+        }
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        JList<String> list = new JList<>(model);
+
+        for (int i = 0; i < countries.size(); i++) {
+
+            model.addElement(countries.get(i));
+        }
+        jList1.setModel(model);
 
     }
 }
