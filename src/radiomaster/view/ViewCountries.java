@@ -62,25 +62,7 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
         httpreq1.setOnCompletionListener(this);
         httpreq1.run();
 
-        java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>() {
-        }.getType();
-        Response<ModelCountries> odgovor1 = new Gson().fromJson(httpreq1.mResponseBody, tip1);
-        //       Response<model_countries> odgovor1 = new Gson().fromJson(, tip1);
-        for (ModelCountries item : odgovor1.getContent()) {
-            System.out.println("title: " + item.getRegion());
-
-            countries.add(item.getName());
-
-        }
-
-        DefaultListModel<String> model = new DefaultListModel<>();
-        JList<String> list = new JList<>(model);
-
-        for (int i = 0; i < countries.size(); i++) {
-
-            model.addElement(countries.get(i));
-        }
-        jList1.setModel(model);
+      
 
 //        httpreq.setURL(CATEGORIES_URL);
 //        httpreq.setMethod(HTTP_METHOD_GET);
@@ -158,6 +140,26 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
 
     @Override
     public void onSuccess(String successBody) {
+        
+          java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>() {
+        }.getType();
+        Response<ModelCountries> odgovor1 = new Gson().fromJson(successBody, tip1);
+        //       Response<model_countries> odgovor1 = new Gson().fromJson(, tip1);
+        for (ModelCountries item : odgovor1.getContent()) {
+            System.out.println("title: " + item.getRegion());
+
+            countries.add(item.getName());
+
+        }
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        JList<String> list = new JList<>(model);
+
+        for (int i = 0; i < countries.size(); i++) {
+
+            model.addElement(countries.get(i));
+        }
+        jList1.setModel(model);
 
     }
 }

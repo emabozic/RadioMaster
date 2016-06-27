@@ -5,17 +5,8 @@
  */
 package radiomaster.view;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.FileVisitResult;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import radiomaster.restful.Response;
 import radiomaster.restful.HttpWrapper;
 import radiomaster.utility.Utility;
 import static radiomaster.restful.HttpWrapper.LOGIN_URL;
