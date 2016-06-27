@@ -99,6 +99,9 @@ public class ModelCountries {
     }
     
     
-    
+        @Override
+    public String toString() {
+        return getName(); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

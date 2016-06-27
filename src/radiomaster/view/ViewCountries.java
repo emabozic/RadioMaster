@@ -24,18 +24,13 @@ THE SOFTWARE.
  */
 package radiomaster.view;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import radiomaster.restful.HttpWrapper;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import radiomaster.model.ModelCountries;
-import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
-import static radiomaster.restful.HttpWrapper.COUNTRIES_URL;
-import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
-import radiomaster.restful.Response;
+import radiomaster.restful.CountriesController;
 
 /**
  *
@@ -43,30 +38,34 @@ import radiomaster.restful.Response;
  */
 public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
-    ArrayList<String> categories;
-    ArrayList<String> countries;
+   ArrayList<String> countries;
+   DefaultListModel<ModelCountries> model;
+   List<ModelCountries> modelCountries;
+   CountriesController cc;
+   ModelCountries mc;
+
 
     /**
      * Creates new form ViewGoran
      */
     public ViewCountries() throws IOException {
         initComponents();
-        categories = new ArrayList<>();
         countries = new ArrayList<>();
+        cc = new CountriesController();
+        napuniCountries();
 
-        HttpWrapper httpreq = new HttpWrapper();
-        HttpWrapper httpreq1 = new HttpWrapper();
 
-        httpreq1.setURL(COUNTRIES_URL);
-        httpreq1.setMethod(HTTP_METHOD_GET);
-        httpreq1.setOnCompletionListener(this);
-        httpreq1.run();
+        model = new DefaultListModel<>();
+  
+        for (ModelCountries mc : modelCountries) {
 
+            model.addElement(mc);
+        }
+        jList1.setModel(model);
       
-
-//        httpreq.setURL(CATEGORIES_URL);
-//        httpreq.setMethod(HTTP_METHOD_GET);
-//        httpreq.run();
+ this.modelCountries = cc.getCountries();
+ 
+ 
     }
 
     /**
@@ -80,7 +79,7 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -127,7 +126,7 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList jList1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -141,25 +140,10 @@ public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnC
     @Override
     public void onSuccess(String successBody) {
         
-          java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>() {
-        }.getType();
-        Response<ModelCountries> odgovor1 = new Gson().fromJson(successBody, tip1);
-
-        for (ModelCountries item : odgovor1.getContent()) {
-       //     System.out.println("title: " + item.getRegion());
-
-            countries.add(item.getName());
-
-        }
-
-        DefaultListModel<String> model = new DefaultListModel<>();
-        JList<String> list = new JList<>(model);
-
-        for (int i = 0; i < countries.size(); i++) {
-
-            model.addElement(countries.get(i));
-        }
-        jList1.setModel(model);
+    }
+    
+                   private void napuniCountries() {
+         this.modelCountries = cc.getCountries();
 
     }
 }
