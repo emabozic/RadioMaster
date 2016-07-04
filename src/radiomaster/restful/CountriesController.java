@@ -66,6 +66,11 @@ public class CountriesController {
        //     System.out.println("title: " + item.getRegion());
             modc = new ModelCountries();
             modc.setName(item.getName());
+            modc.setId(item.getId());
+            modc.setStations_count(item.getStations_count());
+            modc.setCountry_code(item.getCountry_code());
+            modc.setRegion(item.getRegion());
+            modc.setSubregion(item.getSubregion());
             countries.add(modc);
 
         }
