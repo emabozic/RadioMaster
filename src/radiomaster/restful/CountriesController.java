@@ -33,7 +33,6 @@ import java.util.List;
 import radiomaster.model.ModelCountries;
 import static radiomaster.restful.HttpWrapper.COUNTRIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
-import radiomaster.restful.Response;
 
 
 /**
