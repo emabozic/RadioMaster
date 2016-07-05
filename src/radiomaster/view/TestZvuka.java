@@ -6,7 +6,12 @@ import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import radiomaster.restful.ZvukController;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 /**
  *
  * @author Goran
@@ -53,7 +58,7 @@ public class TestZvuka extends javax.swing.JFrame {
 
         jLabel1.setText("*Ovi buttoni pozivaju kontroler koji može reproducirati *.wav datoteku");
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Play Stream");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -65,20 +70,19 @@ public class TestZvuka extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,35 +93,73 @@ public class TestZvuka extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ZvukController zvuk = new ZvukController();
-        try {
-            zvuk.playSound("file");
-        } catch (Exception ex) {
-            Logger.getLogger(TestZvuka.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+     new Thread(new ZvukController()).start();
+     
+  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-       ZvukController zvuk = new ZvukController();
-        try {
-            zvuk.playSound("URL");
-        } catch (Exception ex) {
-            Logger.getLogger(TestZvuka.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//       ZvukController zvuk = new ZvukController();
+//        try {
+//            zvuk.playSound("URL");
+//        } catch (Exception ex) {
+//            Logger.getLogger(TestZvuka.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-  
+       
+        try
+        {
+    playRadioStream ( "http://radio.flex.ru:8000/radionami" );
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace ();
+        } catch (JavaLayerException ex) {
+            Logger.getLogger(TestZvuka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static void playRadioStream ( String s ) throws IOException, JavaLayerException
+    {
+        // Connection
+        URLConnection urlConnection = new URL ( s ).openConnection ();
+
+        // If you have proxy
+//                Properties systemSettings = System.getProperties ();
+//                systemSettings.put ( "proxySet", true );
+//                systemSettings.put ( "http.proxyHost", "host" );
+//                systemSettings.put ( "http.proxyPort", "port" );
+        // If you have proxy auth
+        //        BASE64Encoder encoder = new BASE64Encoder ();
+        //        String encoded = encoder.encode ( ( "login:pass" ).getBytes () );
+        //        urlConnection.setRequestProperty ( "Proxy-Authorization", "Basic " + encoded );
+
+        // Connecting
+        urlConnection.connect ();
+
+        // Playing
+        Player player = new Player ( urlConnection.getInputStream () );
+        player.play ();
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
