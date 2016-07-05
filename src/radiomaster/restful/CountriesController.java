@@ -45,6 +45,7 @@ public class CountriesController {
        
     List<ModelCountries> countries = new ArrayList<>();
     ModelCountries modc;
+    List<String> cc;
 
 
     public  List<ModelCountries> getCountries() {
@@ -75,4 +76,29 @@ public class CountriesController {
         }
     return countries;
 }
+    
+    
+        public List<String> getCountryCode(){
+        HttpWrapper wrapper = new HttpWrapper();
+        cc = new ArrayList<>();
+
+        wrapper.setURL(COUNTRIES_URL)
+                //                .setOnCompletionListener(this)
+                .setMethod(HTTP_METHOD_GET);
+        wrapper.run();
+
+        java.lang.reflect.Type tip = new TypeToken<Response<ModelCountries>>() {
+        }.getType();
+
+        Response<ModelCountries> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
+
+        for (ModelCountries item : odgovor.getContent()) {
+            cc.add(String.valueOf(item.getCountry_code()));
+        }
+        
+        return cc;
+    }
+    
+    
+    
 }

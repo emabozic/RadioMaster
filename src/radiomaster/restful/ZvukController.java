@@ -22,8 +22,8 @@ public class ZvukController implements Runnable {
         AudioInputStream stream = null;
 
             try {
-                stream = AudioSystem.getAudioInputStream(new File(
-                        "src/radiomaster/sound/2.wav"));
+                stream = AudioSystem.getAudioInputStream(new URL(
+                        "http://freewavesamples.com/files/Yamaha-PSR-22-Rhumba.wav"));
             } catch (UnsupportedAudioFileException ex) {
                 Logger.getLogger(ZvukController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
