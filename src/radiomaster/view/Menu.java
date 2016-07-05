@@ -143,7 +143,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnStations1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStations1ActionPerformed
         try {
-            new TestZvuka2().setVisible(true);
+            new TestZvuka().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {

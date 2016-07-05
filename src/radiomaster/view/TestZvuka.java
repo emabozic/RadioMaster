@@ -17,6 +17,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import radiomaster.restful.ZvukController;
+import static java.util.Arrays.stream;
+import static java.util.stream.StreamSupport.stream;
 
 /**
  *
@@ -24,12 +26,12 @@ import radiomaster.restful.ZvukController;
  */
 
 
-public class TestZvuka2 extends javax.swing.JFrame {
+public class TestZvuka extends javax.swing.JFrame {
 
     /**
      * Creates new form TestZvuka2
      */
-    public TestZvuka2() throws UnsupportedAudioFileException, IOException, LineUnavailableException, Exception {
+    public TestZvuka() throws UnsupportedAudioFileException, IOException, LineUnavailableException, Exception {
         initComponents();
         
        
@@ -81,7 +83,7 @@ public class TestZvuka2 extends javax.swing.JFrame {
         try {
             zvuk.playSound();
         } catch (Exception ex) {
-            Logger.getLogger(TestZvuka2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestZvuka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
