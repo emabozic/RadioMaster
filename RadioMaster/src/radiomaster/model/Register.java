@@ -9,7 +9,7 @@ package radiomaster.model;
  *
  * @author Gauss Developer
  */
-public class Register extends Datetime{
+public class Register extends DateTime{
     
     
     private String username;

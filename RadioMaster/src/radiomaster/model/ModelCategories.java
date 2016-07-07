@@ -9,12 +9,15 @@ package radiomaster.model;
  *
  * @author Ema
  */
-public class Categories extends Datetime{
+public class ModelCategories {
     
     private int id;
     private String title;
     private String description;
-    private String created_at;
+    private DateTime created_at;
+    private DateTime updated_at;
+    private String slug;
+    
 
     public int getId() {
         return id;
@@ -40,18 +43,36 @@ public class Categories extends Datetime{
         this.description = description;
     }
 
-    public String getCreated_at() {
+    public DateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(DateTime created_at) {
         this.created_at = created_at;
     }
-    
-    
-     @Override
-    public String toString(){
-        return getDate() + " " + getTimezone() + " " + getTimezone_type();
+
+    public DateTime getUpdated_at() {
+        return updated_at;
     }
+
+    public void setUpdated_at(DateTime updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+    
+    @Override
+    public String toString() {
+        return getTitle(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
     
 }

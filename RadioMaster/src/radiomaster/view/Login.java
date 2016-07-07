@@ -5,17 +5,8 @@
  */
 package radiomaster.view;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.FileVisitResult;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import radiomaster.model.Response;
 import radiomaster.restful.HttpWrapper;
 import radiomaster.utility.Utility;
 import static radiomaster.restful.HttpWrapper.LOGIN_URL;
@@ -239,7 +230,7 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
     @Override
     public void onSuccess(String successBody) {
         
-        new Categories().setVisible(true);
+        new Menu().setVisible(true);
         this.dispose();
         
         System.out.println("Successful login");

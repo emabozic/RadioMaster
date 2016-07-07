@@ -1,5 +1,7 @@
-/*
- * /**
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}/**
 license The MIT License
 
 Copyright (c) 2012-2016 Gauss, www.gauss.hr
@@ -22,55 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-
-
-package radiomaster.model;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-/**
- *
- * @author Ema
- */
-
-
-
-public class DateTime {
-    
-    private String date;
-    private int timezone_type;
-    private String timezone;
-
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getTimezone_type() {
-        return timezone_type;
-    }
-
-    public void setTimezone_type(int timezone_type) {
-        this.timezone_type = timezone_type;
-    }
-
-    public String getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
-    
-    @Override
-    public String toString() {
-        return getDate() + " " + getTimezone() + " " + getTimezone_type(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-}
+${licensePrefix}Each line should be prefixed with ${licensePrefix}
+<#if licenseLast??>
+${licenseLast}
+</#if>
