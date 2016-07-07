@@ -32,14 +32,14 @@ import javax.swing.JMenuItem;
 import radiomaster.model.ModelCategories;
 import radiomaster.model.ModelSubcategories;
 import radiomaster.restful.HttpWrapper;
-import radiomaster.restful.ControllerCategories;
-import radiomaster.restful.ControllerSubcategories;
+import radiomaster.controllers.ControllerCategories;
+import radiomaster.controllers.ControllerSubcategories;
 
 /**
  *
  * @author Ema
  */
-public class ViewCategories extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
+public class Categories extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
     ArrayList<String> categories;
     ArrayList<String> subcategories;
@@ -58,7 +58,7 @@ public class ViewCategories extends javax.swing.JFrame implements HttpWrapper.On
     /**
      * Creates new form view_categories
      */
-    public ViewCategories() {
+    public Categories() {
         initComponents();
         id = new ArrayList<>();
         categories = new ArrayList<>();

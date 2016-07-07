@@ -1,5 +1,4 @@
-/*
- * /**
+/**
 license The MIT License
 
 Copyright (c) 2012-2016 Gauss, www.gauss.hr
@@ -24,10 +23,9 @@ THE SOFTWARE.
  */
 
 
-package radiomaster.restful;
+package radiomaster.controllers;
 
 import java.util.List;
-import radiomaster.model.StationResponseModel;
 
 /**
  *
@@ -35,11 +33,11 @@ import radiomaster.model.StationResponseModel;
  */
 
 
-public class Response2 {
+public class Response<T> {
     
     private int status;
     private String message;
-    private StationResponseModel content;
+    private List<T> content;
 
     public int getStatus() {
         return status;
@@ -57,17 +55,15 @@ public class Response2 {
         this.message = message;
     }
 
-    public StationResponseModel getContent() {
+    public List<T> getContent() {
         return content;
     }
 
-    public void setContent(StationResponseModel content) {
+    public void setContent(List<T> content) {
         this.content = content;
     }
 
-    public Response2(int status, String message, StationResponseModel content) {
-        this.status = status;
-        this.message = message;
-        this.content = content;
-    }
+    
+    
+    
 }

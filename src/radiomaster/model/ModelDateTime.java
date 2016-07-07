@@ -23,43 +23,53 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
+
 package radiomaster.model;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
- * @author Developer
+ * @author Ema
  */
 
 
-public class StationResponseModel {
-    private int total;
-    private int total_page;
-    private List<Stations> stations;
 
-    public int getTotal() {
-        return total;
+public class ModelDateTime {
+    
+    private String date;
+    private int timezone_type;
+    private String timezone;
+
+
+    public String getDate() {
+        return date;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public int getTotal_page() {
-        return total_page;
+    public int getTimezone_type() {
+        return timezone_type;
     }
 
-    public void setTotal_page(int total_page) {
-        this.total_page = total_page;
+    public void setTimezone_type(int timezone_type) {
+        this.timezone_type = timezone_type;
     }
 
-    public List<Stations> getStations() {
-        return stations;
+    public String getTimezone() {
+        return timezone;
     }
 
-    public void setStations(List<Stations> stations) {
-        this.stations = stations;
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
+    
+    @Override
+    public String toString() {
+        return getDate() + " " + getTimezone() + " " + getTimezone_type(); //To change body of generated methods, choose Tools | Templates.
     }
     
     

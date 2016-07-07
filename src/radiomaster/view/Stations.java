@@ -28,15 +28,15 @@ import javax.swing.JMenuItem;
 import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
-import radiomaster.model.Stations;
-import radiomaster.restful.Response2;
+//import radiomaster.model.Stations;
+import radiomaster.controllers.Response2;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.text.View;
-import radiomaster.restful.ControllerCategories;
-import radiomaster.controllers.StreamController;
+import radiomaster.controllers.ControllerCategories;
+import radiomaster.controllers.ControllerStream;
 
 
 /**
@@ -46,7 +46,7 @@ import radiomaster.controllers.StreamController;
  */
 
 
-public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
+public class Stations extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
     
     ArrayList<String> stations;
     JMenuItem jsubmenu;
@@ -64,7 +64,7 @@ public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCo
     
     
     
-    public ViewStations(){
+    public Stations(){
         initComponents();
  
         stations = new ArrayList<>();
@@ -205,28 +205,33 @@ public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCo
     private javax.swing.JList<String> lstStations;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void onSuccess(String successBody) {   
-            Response2 odgovor= new Gson().fromJson(successBody,Response2.class);
-
-            for (Stations item : odgovor.getContent().getStations()) {
-                System.out.println("Station: " + item.getName());
-           
-                stations.add(item.getStream_url());
-            }  
-            DefaultListModel model = new DefaultListModel();
-                       JList <String> list = new JList<>(model);
-                       for (int i=0; i<stations.size();i++){
-                           model.addElement(stations.get(i));
-                       }
-          lstStations.setModel(model);
-          
-         
-           
-    }
+//    @Override
+//    public void onSuccess(String successBody) {   
+//            Response2 odgovor= new Gson().fromJson(successBody,Response2.class);
+//
+//            for (Stations item : odgovor.getContent().getStations()) {
+//                System.out.println("Station: " + item.getName());
+//           
+//                stations.add(item.getStream_url());
+//            }  
+//            DefaultListModel model = new DefaultListModel();
+//                       JList <String> list = new JList<>(model);
+//                       for (int i=0; i<stations.size();i++){
+//                           model.addElement(stations.get(i));
+//                       }
+//          lstStations.setModel(model);
+//          
+//         
+//           
+//    }
 
     @Override
     public void onError(String error) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onSuccess(String successBody) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

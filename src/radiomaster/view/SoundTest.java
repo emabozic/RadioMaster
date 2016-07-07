@@ -1,6 +1,6 @@
 package radiomaster.view;
 
-import radiomaster.controllers.StreamController;
+import radiomaster.controllers.ControllerStream;
 
 /**
  *
@@ -11,12 +11,12 @@ public class SoundTest extends javax.swing.JFrame {
     /**
      * Creates new form TestZvuka2
      */
-    StreamController sc = new StreamController();
+    ControllerStream sc = new ControllerStream();
 
     public SoundTest() {
         initComponents();
         jLabel3.setText(Integer.toString(jSlider1.getValue()) + "%");
-        StreamController vol = new StreamController();
+        ControllerStream vol = new ControllerStream();
         vol.setGain((float) 0.8);
         
         jLabel5.setVisible(false);
@@ -150,7 +150,7 @@ public class SoundTest extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
 
-        StreamController vol = new StreamController();
+        ControllerStream vol = new ControllerStream();
         float setvolume = (float) (jSlider1.getValue() / (float) 100);
         System.out.println(jSlider1.getValue() + "%   " + setvolume);
         vol.setGain(setvolume);

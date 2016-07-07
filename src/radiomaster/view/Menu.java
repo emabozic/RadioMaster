@@ -121,19 +121,19 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoryActionPerformed
-        new ViewCategories().setVisible(true);
+        new Categories().setVisible(true);
     }//GEN-LAST:event_btnCategoryActionPerformed
 
     private void btnCountriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountriesActionPerformed
         try {
-            new ViewCountries().setVisible(true);
+            new Countries().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCountriesActionPerformed
 
     private void btnStationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStationsActionPerformed
-        new ViewStations().setVisible(true);
+        new Stations().setVisible(true);
     }//GEN-LAST:event_btnStationsActionPerformed
 
     private void btnSoundTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundTestActionPerformed

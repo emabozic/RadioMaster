@@ -30,27 +30,27 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import radiomaster.model.ModelCountries;
-import radiomaster.restful.CountriesController;
+import radiomaster.controllers.ControllerCountries;
 
 /**
  *
  * @author Goran
  */
-public class ViewCountries extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
+public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
     ArrayList<String> countries;
     DefaultListModel<ModelCountries> model;
     List<ModelCountries> modelCountries;
-    CountriesController cc;
+    ControllerCountries cc;
     ModelCountries mc;
 
     /**
      * Creates new form ViewGoran
      */
-    public ViewCountries() throws IOException {
+    public Countries() throws IOException {
         initComponents();
         countries = new ArrayList<>();
-        cc = new CountriesController();
+        cc = new ControllerCountries();
         napuniCountries();
 
         model = new DefaultListModel<>();

@@ -24,13 +24,14 @@ THE SOFTWARE.
  */
  
 
-package radiomaster.restful;
+package radiomaster.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
-import radiomaster.model.Stations;
+import radiomaster.model.ModelStations;
+import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 
@@ -41,15 +42,15 @@ import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 
 
 public class ControllerStations {
-    List<Stations> stations = new ArrayList<>();
-    Stations ms;
-    CountriesController cc;
+    List<ModelStations> stations = new ArrayList<>();
+    ModelStations ms;
+    ControllerCountries cc;
     List<String> id_c;
     public ControllerStations(){
-        cc = new CountriesController();
+        cc = new ControllerCountries();
         id_c = cc.getCountryCode();
     }
-    public List<Stations> getStations(){
+    public List<ModelStations> getStations(){
         HttpWrapper wrapper = new HttpWrapper();
         for (int i=0; i<stations.size();i++){
             
@@ -57,15 +58,15 @@ public class ControllerStations {
                 .setMethod(HTTP_METHOD_GET);
         wrapper.run();
 
-        java.lang.reflect.Type tip = new TypeToken<Response<Stations>>() {
+        java.lang.reflect.Type tip = new TypeToken<Response<ModelStations>>() {
         }.getType();
 
-        Response<Stations> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
+        Response<ModelStations> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
         
-        for (Stations item : odgovor.getContent()) {
+        for (ModelStations item : odgovor.getContent()) {
 //            System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
 //            categories.add(item);
-              ms = new Stations();
+              ms = new ModelStations();
               ms.setId(item.getId());
               ms.setCreated_at(item.getCreated_at());
               ms.setUpdated_at(item.getUpdated_at());

@@ -24,7 +24,7 @@ THE SOFTWARE.
  */
  
 
-package radiomaster.restful;
+package radiomaster.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static jdk.nashorn.internal.runtime.Debug.id;
 import radiomaster.model.ModelSubcategories;
+import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_sub_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 

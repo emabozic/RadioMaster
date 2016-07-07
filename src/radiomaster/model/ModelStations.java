@@ -32,7 +32,7 @@ package radiomaster.model;
  *
  * @author Slaven Karakaš
  */
-public class Stations {
+public class ModelStations {
     private int id;
     private String name;
     private boolean favorite;

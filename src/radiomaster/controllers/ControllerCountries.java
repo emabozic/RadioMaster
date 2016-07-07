@@ -24,13 +24,14 @@ THE SOFTWARE.
  */
 
 
-package radiomaster.restful;
+package radiomaster.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 import radiomaster.model.ModelCountries;
+import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.COUNTRIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 
@@ -41,7 +42,7 @@ import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
  */
 
 
-public class CountriesController {
+public class ControllerCountries {
        
     List<ModelCountries> countries = new ArrayList<>();
     ModelCountries modc;

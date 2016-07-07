@@ -23,7 +23,7 @@ import javazoom.jl.player.Player;
  * \licence gauss ili MIT\MIT2 licenca
  * \copyright akoimate copy right ili na kraju licensce agreementa ili posebi tag
  */
-public class StreamController {
+public class ControllerStream {
     //region CLASS PARAMETERS
     
 
@@ -39,7 +39,7 @@ public class StreamController {
     //region CLASS CONSTRUCT
     
     
-    public StreamController(){
+    public ControllerStream(){
         System.out.println(TAG);
     }
 
