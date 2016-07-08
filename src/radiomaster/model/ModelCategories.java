@@ -14,8 +14,8 @@ public class ModelCategories {
     private int id;
     private String title;
     private String description;
-    private DateTime created_at;
-    private DateTime updated_at;
+    private ModelDateTime created_at;
+    private ModelDateTime updated_at;
     private String slug;
     
 
@@ -43,19 +43,19 @@ public class ModelCategories {
         this.description = description;
     }
 
-    public DateTime getCreated_at() {
+    public ModelDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(DateTime created_at) {
+    public void setCreated_at(ModelDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public DateTime getUpdated_at() {
+    public ModelDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(DateTime updated_at) {
+    public void setUpdated_at(ModelDateTime updated_at) {
         this.updated_at = updated_at;
     }
 

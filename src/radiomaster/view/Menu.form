@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnStations1" min="-2" pref="134" max="-2" attributes="0"/>
+                  <Component id="btnSoundTest" min="-2" pref="134" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="btnStations" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="btnStations1" min="-2" pref="42" max="-2" attributes="0"/>
+              <Component id="btnSoundTest" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -85,12 +85,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStationsActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnStations1">
+    <Component class="javax.swing.JButton" name="btnSoundTest">
       <Properties>
         <Property name="text" type="java.lang.String" value="Test Play Sound"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStations1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSoundTestActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

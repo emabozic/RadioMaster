@@ -29,12 +29,7 @@ package radiomaster.view;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.LineUnavailableException;
 
-/**
- *
- * @author Ema
- */
 
 
 public class Menu extends javax.swing.JFrame {
@@ -58,7 +53,7 @@ public class Menu extends javax.swing.JFrame {
         btnCategory = new javax.swing.JButton();
         btnCountries = new javax.swing.JButton();
         btnStations = new javax.swing.JButton();
-        btnStations1 = new javax.swing.JButton();
+        btnSoundTest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +78,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnStations1.setText("Test Play Sound");
-        btnStations1.addActionListener(new java.awt.event.ActionListener() {
+        btnSoundTest.setText("Test Play Sound");
+        btnSoundTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStations1ActionPerformed(evt);
+                btnSoundTestActionPerformed(evt);
             }
         });
 
@@ -96,7 +91,7 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnStations1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSoundTest, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
@@ -118,7 +113,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(btnStations, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnStations1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSoundTest, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -126,32 +121,28 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoryActionPerformed
-        new ViewCategories().setVisible(true);
+        new Categories().setVisible(true);
     }//GEN-LAST:event_btnCategoryActionPerformed
 
     private void btnCountriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountriesActionPerformed
         try {
-            new ViewCountries().setVisible(true);
+            new Countries().setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCountriesActionPerformed
 
     private void btnStationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStationsActionPerformed
-        new ViewStations().setVisible(true);
+        new Stations().setVisible(true);
     }//GEN-LAST:event_btnStationsActionPerformed
 
-    private void btnStations1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStations1ActionPerformed
+    private void btnSoundTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundTestActionPerformed
         try {
-            new TestZvuka().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LineUnavailableException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            new StreamLink().setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnStations1ActionPerformed
+    }//GEN-LAST:event_btnSoundTestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,7 +152,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCategory;
     private javax.swing.JButton btnCountries;
+    private javax.swing.JButton btnSoundTest;
     private javax.swing.JButton btnStations;
-    private javax.swing.JButton btnStations1;
     // End of variables declaration//GEN-END:variables
 }
