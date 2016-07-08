@@ -1,7 +1,6 @@
 package radiomaster.view;
 
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -23,11 +22,9 @@ public class StreamLink extends javax.swing.JFrame {
     public StreamLink() {
         initComponents();
         Utility.center(this);
-        jLabel3.setText(Integer.toString(jSlider1.getValue()) + "%");
         getContentPane().setBackground(Color.WHITE);
-        
+        jLabel3.setText(Integer.toString(jSlider1.getValue()) + "%");
         initControllerStreamInsance.setGain((float) 0.8);
-
         jLabel8.setVisible(false);
     }
 
@@ -170,26 +167,21 @@ public class StreamLink extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-
-       
         float setvolume = (float) (jSlider1.getValue() / (float) 100);
         System.out.println(jSlider1.getValue() + "%   " + setvolume);
         initControllerStreamInsance.setGain(setvolume);
-
         jLabel3.setText(Integer.toString(jSlider1.getValue()) + "%");
-
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jLbPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbPlayMouseClicked
         try {
             if(jLbPlay.isEnabled()) {
-            initControllerStreamInsance.StartPlayingAudioStream(jTextField1.getText());
-            jLabel8.setVisible(true);
-            jLbPlay.setEnabled(false);
+                initControllerStreamInsance.StartPlayingAudioStream(jTextField1.getText());
+                jLabel8.setVisible(true);
+                jLbPlay.setEnabled(false);
             }
         } catch (Exception e) {
-
-        }
+          }
     }//GEN-LAST:event_jLbPlayMouseClicked
 
     private void jLbStopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbStopMousePressed
@@ -198,19 +190,20 @@ public class StreamLink extends javax.swing.JFrame {
             jLabel8.setVisible(false);
             jLbPlay.setEnabled(true);
         } catch (Exception e) {
-        }
+            e.printStackTrace();
+          }
     }//GEN-LAST:event_jLbStopMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-    Transferable t = c.getContents(this);
-    if (t == null)
-        return;
-    try {
-        jTextField1.setText((String) t.getTransferData(DataFlavor.stringFlavor));
-    } catch (Exception e){
-        e.printStackTrace();
-    }
+        Transferable t = c.getContents(this);
+        if (t == null)
+            return;
+        try {
+            jTextField1.setText((String) t.getTransferData(DataFlavor.stringFlavor));
+        } catch (Exception e){
+            e.printStackTrace();
+          }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
