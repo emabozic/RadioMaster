@@ -138,7 +138,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnSoundTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundTestActionPerformed
         try {
-            new SoundTest().setVisible(true);
+            new StreamLink().setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }

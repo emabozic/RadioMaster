@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import radiomaster.view.Login;
+import radiomaster.view.StreamLink;
 
 
 /**
@@ -21,8 +22,7 @@ public class RadioMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException, Exception {
-//        new view_countries().setVisible(true);
-        new Login().setVisible(true);
+        new StreamLink().setVisible(true);
     }
     
 }

@@ -19,10 +19,7 @@ public class Utility {
     public static final String APP_NAME="RadioMaster";
     
     public static void center(JFrame frame){
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
+        frame.setLocationRelativeTo(null);
     }
     
     public static void error (JFrame frame,String poruka){
