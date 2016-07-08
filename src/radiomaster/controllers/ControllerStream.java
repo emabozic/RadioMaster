@@ -1,3 +1,18 @@
+/**
+* \brief Audio Stream controller
+* \details This controller class is used to provide a player and events to 
+*          control supplied audio stream from a URL. 
+* @author Goran
+* @version 1.0
+* \date Jul 8, 2016
+* \copyright
+* This code and information is provided "as is" without warranty of
+* any kind, either expressed or implied, including but not limited to
+* the implied warranties of merchantability and/or fitness for a
+* particular purpose.
+* \par
+* Copyright (c) Gauss d.o.o. All rights reserved
+*/
 package radiomaster.controllers;
 
 import java.io.BufferedInputStream;
@@ -13,16 +28,6 @@ import javax.swing.JOptionPane;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-/**
- * \brief   Audio Stream controller
- * \details This controller class is used to provide a player and events to 
- *          control supplied audio stream from a URL. 
- * 
- * @author pepy
- * @version 1.0
- * \licence gauss ili MIT\MIT2 licenca
- * \copyright akoimate copy right ili na kraju licensce agreementa ili posebi tag
- */
 public class ControllerStream {
     //region CLASS PARAMETERS
     
