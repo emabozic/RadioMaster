@@ -21,7 +21,9 @@ public class StreamLink extends javax.swing.JFrame {
 
     public StreamLink() {
         initComponents();
+        setTitle(Utility.APP_NAME);
         Utility.center(this);
+        setResizable(false);
         getContentPane().setBackground(Color.WHITE);
         jLabel3.setText(Integer.toString(jSlider1.getValue()) + "%");
         initControllerStreamInsance.setGain((float) 0.8);
