@@ -41,19 +41,18 @@ public class ControllerCountries {
      * Calling this method will get countries list from the HttpWrapper and put
      * them into the lost modeled by ModelCountries
      */
-    public List<ModelCountries> getCountries() {
-        //HttpWrapper httpreq = new HttpWrapper();
-        HttpWrapper httpreq1 = new HttpWrapper();
-        httpreq1.setURL(COUNTRIES_URL);
-        httpreq1.setMethod(HTTP_METHOD_GET);
-        //httpreq1.setOnCompletionListener(this);
-        httpreq1.run();
-        java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>() {
+
+    public  List<ModelCountries> getCountries() {
+       // HttpWrapper httpreq = new HttpWrapper();
+        HttpWrapper httpRequest = new HttpWrapper();
+        httpRequest.setURL(COUNTRIES_URL);
+        httpRequest.setMethod(HTTP_METHOD_GET);
+        httpRequest.run();
+        java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>(){
         }.getType();
         Response<ModelCountries> odgovor1 = new Gson()
-                .fromJson(httpreq1.mResponseBody, tip1);
+                .fromJson(httpRequest.mResponseBody, tip1);
         for (ModelCountries item : odgovor1.getContent()) {
-            //System.out.println("title: " + item.getRegion());
             modc = new ModelCountries();
             modc.setName(item.getName());
             modc.setId(item.getId());
@@ -62,14 +61,14 @@ public class ControllerCountries {
             modc.setRegion(item.getRegion());
             modc.setSubregion(item.getSubregion());
             countries.add(modc);
-
         }
-        return countries;
+    return countries;
     }
 
     /**
      * This method will get country code from the specific country and put it
      * into String
+     * @return 
      */
     public List<String> getCountryCode() {
         HttpWrapper wrapper = new HttpWrapper();

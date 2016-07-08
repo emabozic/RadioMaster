@@ -54,7 +54,6 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         }
         jLcountries.setModel(model);
         this.modelCountries = cc.getCountries();
-
     }
 
     /**
