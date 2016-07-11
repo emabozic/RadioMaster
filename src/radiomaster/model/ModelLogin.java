@@ -1,15 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Model Login
+ * 
+* This model class represents the Login object and also have logic to update
+ * controller if its data changes.
+ * 
+* @author Nikolina Pepić
+ * @version 1.0
+ * 
+* Jul 8, 2016
+ * 
+* This code and information is provided "as is" without warranty of any kind,
+ * either expressed or implied, including but not limited to the implied
+ * warranties of merchantability and/or fitness for a particular purpose.
+ * 
+* Copyright (c) Gauss d.o.o. All rights reserved
  */
 package radiomaster.model;
 
-/**
- *
- * @author Gauss Developer
- */
-public class ModelLogin  {
+public class ModelLogin {
+    //region CLASS PARAMETERS
     
     private int id;
     private String username;
@@ -17,7 +26,9 @@ public class ModelLogin  {
     private String email;
     private String createdAt;
     private String updatedAt;
-
+    //endregion
+    
+    //region GETTERS AND SETTERS
     public int getId() {
         return id;
     }
@@ -65,12 +76,6 @@ public class ModelLogin  {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
-    
-    
-    
 
-    
-            
-    
-    
+    //endregion
 }
