@@ -1,22 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Model Register
+ * 
+* This model class represents the Register object and also have logic to update
+ * controller if its data changes.
+ * 
+* @author Nikolina Pepić
+ * @version 1.0
+ * 
+* Jul 8, 2016
+ * 
+* This code and information is provided "as is" without warranty of any kind,
+ * either expressed or implied, including but not limited to the implied
+ * warranties of merchantability and/or fitness for a particular purpose.
+ * 
+* Copyright (c) Gauss d.o.o. All rights reserved
  */
 package radiomaster.model;
 
-/**
- *
- * @author Gauss Developer
- */
-public class ModelRegister extends ModelDateTime{
-    
-    
+public class ModelRegister extends ModelDateTime {
+
     private String username;
     private String email;
     private String password;
     private String created_at;
 
+   //region GETTERS AND SETTERS
+    
     public String getUsername() {
         return username;
     }
@@ -48,10 +57,17 @@ public class ModelRegister extends ModelDateTime{
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
+
+    //endregion 
     
-    
+    //region CUSTOM METHOD
+    /**
+     * * This method overrides toString method
+     * @return Date, Timezone and Timezone type
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return getDate() + " " + getTimezone() + " " + getTimezone_type();
     }
+    //endregion
 }

@@ -1,8 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Register View
+ * 
+* This Register View represents the registration form of the data that Model
+ * Register contains.
+ * 
+* @author Nikolina Pepić
+ * @version 1.0
+ * 
+* Jul 8, 2016
+ * 
+* This code and information is provided "as is" without warranty of any kind,
+ * either expressed or implied, including but not limited to the implied
+ * warranties of merchantability and/or fitness for a particular purpose.
+ * 
+* Copyright (c) Gauss d.o.o. All rights reserved
  */
+
 package radiomaster.view;
 
 import java.awt.Color;
@@ -15,10 +28,7 @@ import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.REGISTER_URL;
 import radiomaster.utility.Utility;
 
-/**
- *
- * @author Gauss Developer
- */
+
 public class Register extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
     /**
@@ -135,9 +145,17 @@ public class Register extends javax.swing.JFrame implements HttpWrapper.OnComple
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //region CUSTOM METHODS
+    /**
+     * Pressing button SignIn the first will be checked if all fields are 
+     * filled and then it will store the data that Register Model contains.
+     * @param evt 
+     */
+    
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
 
-        if (!kontrola()) {
+        if (!control()) {
             return;
         }
 
@@ -153,30 +171,10 @@ public class Register extends javax.swing.JFrame implements HttpWrapper.OnComple
         wrapper.run();
 
         
-//        try {
-//            int code = wrapper.getHttpConn().getResponseCode();
-//            System.out.println("code " + code);
-//            if(code!=200){
-//                JOptionPane.showMessageDialog(
-//                    getRootPane(), //prozor koji ga zove
-//                    "Invalid username or password", //prikazani tekst
-//                    "Error",//naslov
-//                    JOptionPane.ERROR_MESSAGE //vrsta poruke
-//                        );
-//                
-//            
-//            }else{
-//                System.out.println("sve ok");
-//            }
-//            
-//        } catch (IOException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//           
-//        }
-        //this.dispose();
-
     }//GEN-LAST:event_btnSignInActionPerformed
 
+    //endregion 
+    
     /**
      * @param args the command line arguments
      */
@@ -192,7 +190,14 @@ public class Register extends javax.swing.JFrame implements HttpWrapper.OnComple
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private boolean kontrola() {
+    //region CUSTOM METHODS
+    
+    /**
+     * Calling this method will check if all fields are filled.
+     * @return true
+     */
+    
+    private boolean control() {
         if (txtUsername.getText().trim().length() == 0) {
             Utility.error(this, "Insert username");
             txtUsername.requestFocus();
@@ -212,6 +217,7 @@ public class Register extends javax.swing.JFrame implements HttpWrapper.OnComple
         return true;
 
     }
+    //endregion
 
     @Override
     public void onSuccess(String successBody) {
