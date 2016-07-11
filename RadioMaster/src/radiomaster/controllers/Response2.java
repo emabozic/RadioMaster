@@ -24,53 +24,47 @@ THE SOFTWARE.
  */
 
 
-package radiomaster.model;
+package radiomaster.controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-/**
- *
- * @author Ema
- */
+import java.util.List;
+import radiomaster.model.ModelStationResponseModel;
 
 
 
-public class DateTime {
+
+public class Response2 {
     
-    private String date;
-    private int timezone_type;
-    private String timezone;
+    private int status;
+    private String message;
+    private ModelStationResponseModel content;
 
-
-    public String getDate() {
-        return date;
+    public int getStatus() {
+        return status;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public int getTimezone_type() {
-        return timezone_type;
+    public String getMessage() {
+        return message;
     }
 
-    public void setTimezone_type(int timezone_type) {
-        this.timezone_type = timezone_type;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getTimezone() {
-        return timezone;
+    public ModelStationResponseModel getContent() {
+        return content;
     }
 
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
+    public void setContent(ModelStationResponseModel content) {
+        this.content = content;
     }
-    
-    @Override
-    public String toString() {
-        return getDate() + " " + getTimezone() + " " + getTimezone_type(); //To change body of generated methods, choose Tools | Templates.
+
+    public Response2(int status, String message, ModelStationResponseModel content) {
+        this.status = status;
+        this.message = message;
+        this.content = content;
     }
-    
-    
 }

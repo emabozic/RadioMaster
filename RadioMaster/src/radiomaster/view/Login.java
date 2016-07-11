@@ -30,6 +30,9 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
 
         lblRegister.setForeground(Color.BLUE);
         lblForget.setForeground(Color.RED);
+        
+        txtEmail.setText("goran@gmail.com");
+        txtPassword.setText("goran");
 
     }
 

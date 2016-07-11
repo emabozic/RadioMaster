@@ -23,13 +23,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
-package radiomaster.restful;
+package radiomaster.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 import radiomaster.model.ModelCategories;
+import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 

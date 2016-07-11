@@ -28,12 +28,15 @@ import javax.swing.JMenuItem;
 import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
-import radiomaster.model.Stations;
-import radiomaster.restful.Response2;
+//import radiomaster.model.Stations;
+import radiomaster.controllers.Response2;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.text.View;
+import radiomaster.controllers.ControllerCategories;
+import radiomaster.controllers.ControllerStream;
 
 
 /**
@@ -43,7 +46,7 @@ import javax.swing.JList;
  */
 
 
-public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
+public class Stations extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
     
     ArrayList<String> stations;
     JMenuItem jsubmenu;
@@ -61,7 +64,7 @@ public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCo
     
     
     
-    public ViewStations(){
+    public Stations(){
         initComponents();
  
         stations = new ArrayList<>();
@@ -93,13 +96,29 @@ public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCo
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstStations = new javax.swing.JList<>();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jmenubar = new javax.swing.JMenuBar();
         jmenu = new javax.swing.JMenu();
         jmenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstStations.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstStationsValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstStations);
+
+        jTextField1.setText("jTextField1");
+
+        jButton1.setText("Play");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jmenubar.add(jmenu);
 
@@ -128,13 +147,24 @@ public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCo
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(529, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
 
@@ -151,40 +181,57 @@ public class ViewStations extends javax.swing.JFrame implements HttpWrapper.OnCo
 
     }//GEN-LAST:event_jmenu1MenuKeyPressed
 
+    private void lstStationsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstStationsValueChanged
+       
+        jTextField1.setText(lstStations.getSelectedValue());
+    }//GEN-LAST:event_lstStationsValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu jmenu;
     private javax.swing.JMenu jmenu1;
     public static javax.swing.JMenuBar jmenubar;
     private javax.swing.JList<String> lstStations;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void onSuccess(String successBody) {   
-            Response2 odgovor= new Gson().fromJson(successBody,Response2.class);
-
-            for (Stations item : odgovor.getContent().getStations()) {
-                System.out.println("Station: " + item.getName());
-                stations.add(item.getName());
-            }  
-            DefaultListModel model = new DefaultListModel();
-                       JList <String> list = new JList<>(model);
-                       for (int i=0; i<stations.size();i++){
-                           model.addElement(stations.get(i));
-                       }
-          lstStations.setModel(model);
-          
-         
-           
-    }
+//    @Override
+//    public void onSuccess(String successBody) {   
+//            Response2 odgovor= new Gson().fromJson(successBody,Response2.class);
+//
+//            for (Stations item : odgovor.getContent().getStations()) {
+//                System.out.println("Station: " + item.getName());
+//           
+//                stations.add(item.getStream_url());
+//            }  
+//            DefaultListModel model = new DefaultListModel();
+//                       JList <String> list = new JList<>(model);
+//                       for (int i=0; i<stations.size();i++){
+//                           model.addElement(stations.get(i));
+//                       }
+//          lstStations.setModel(model);
+//          
+//         
+//           
+//    }
 
     @Override
     public void onError(String error) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onSuccess(String successBody) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

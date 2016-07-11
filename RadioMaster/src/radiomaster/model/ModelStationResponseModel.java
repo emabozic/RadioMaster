@@ -23,51 +23,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
-
-package radiomaster.restful;
+package radiomaster.model;
 
 import java.util.List;
-import radiomaster.model.StationResponseModel;
 
 /**
  *
- * @author Ema
+ * @author Developer
  */
 
 
-public class Response2 {
+public class ModelStationResponseModel {
+    private int total;
+    private int total_page;
+    private List<ModelStations> stations;
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getTotal_page() {
+        return total_page;
+    }
+
+    public void setTotal_page(int total_page) {
+        this.total_page = total_page;
+    }
+
+    public List<ModelStations> getStations() {
+        return stations;
+    }
+
+    public void setStations(List<ModelStations> stations) {
+        this.stations = stations;
+    }
     
-    private int status;
-    private String message;
-    private StationResponseModel content;
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public StationResponseModel getContent() {
-        return content;
-    }
-
-    public void setContent(StationResponseModel content) {
-        this.content = content;
-    }
-
-    public Response2(int status, String message, StationResponseModel content) {
-        this.status = status;
-        this.message = message;
-        this.content = content;
-    }
+    
 }

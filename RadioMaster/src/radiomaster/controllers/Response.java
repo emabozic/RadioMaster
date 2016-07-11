@@ -1,5 +1,4 @@
-/*
- * /**
+/**
 license The MIT License
 
 Copyright (c) 2012-2016 Gauss, www.gauss.hr
@@ -24,7 +23,7 @@ THE SOFTWARE.
  */
 
 
-package radiomaster.restful;
+package radiomaster.controllers;
 
 import java.util.List;
 
