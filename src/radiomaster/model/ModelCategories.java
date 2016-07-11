@@ -1,24 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Model Categories
+ * 
+* This model class represents the Categories object and also have logic to
+ * update controller if its data changes.
+ * 
+* @author Ema Božić
+ * @version 1.0
+ * 
+* Jul 8, 2016
+ * 
+* This code and information is provided "as is" without warranty of any kind,
+ * either expressed or implied, including but not limited to the implied
+ * warranties of merchantability and/or fitness for a particular purpose.
+ * 
+* Copyright (c) Gauss d.o.o. All rights reserved
  */
 package radiomaster.model;
 
-/**
- *
- * @author Ema
- */
 public class ModelCategories {
-    
+
+    //region CLASS PARAMETERS
     private int id;
     private String title;
     private String description;
     private ModelDateTime created_at;
     private ModelDateTime updated_at;
     private String slug;
-    
 
+    //endregion
+    //region GETTERS AND SETTERS
     public int getId() {
         return id;
     }
@@ -66,13 +76,18 @@ public class ModelCategories {
     public void setSlug(String slug) {
         this.slug = slug;
     }
-    
+
+    //endregion 
+    //region CUSTOM METHOD
+    /**
+     * * This method overrides toString method
+     *
+     * @return Title
+     */
     @Override
     public String toString() {
         return getTitle(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
-    
+    //endregion
 }

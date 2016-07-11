@@ -1,39 +1,26 @@
-/*
- * /**
-license The MIT License
-
-Copyright (c) 2012-2016 Gauss, www.gauss.hr
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+/**
+ * Model SubCategories
+ * 
+* This model class represents the SubCategories object and also have logic to
+ * update controller if its data changes.
+ * 
+* @author Ema Božić
+ * @version 1.0
+ * 
+* Jul 8, 2016
+ * 
+* This code and information is provided "as is" without warranty of any kind,
+ * either expressed or implied, including but not limited to the implied
+ * warranties of merchantability and/or fitness for a particular purpose.
+ * 
+* Copyright (c) Gauss d.o.o. All rights reserved
  */
-
-
 package radiomaster.model;
 
-/**
- *
- * @author Ema
- */
-
-
 public class ModelSubcategories {
-    
+
+    //region CLASS PARAMETERS
+
     private int id;
     private int parent_id;
     private String title;
@@ -42,6 +29,8 @@ public class ModelSubcategories {
     private ModelDateTime updated_at;
     private String slug;
 
+    //endregion
+    //region GETTERS AND SETTERS
     public int getId() {
         return id;
     }
@@ -97,13 +86,18 @@ public class ModelSubcategories {
     public void setSlug(String slug) {
         this.slug = slug;
     }
-    
-      @Override
+
+    //endregion 
+    //region CUSTOM METHOD
+    /**
+     * * This method overrides toString method
+     *
+     * @return Title
+     */
+    @Override
     public String toString() {
         return getTitle(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
+    //endregion
+
 }

@@ -15,6 +15,7 @@
  * 
 * Copyright (c) Gauss d.o.o. All rights reserved
  */
+
 package radiomaster.model;
 
 public class ModelLogin {
