@@ -1,7 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Login View
+ * 
+* This Login View represents the authorization form of the data that Model
+ * Login contains.
+ * 
+* @author Nikolina Pepić
+ * @version 1.0
+ * 
+* Jul 8, 2016
+ * 
+* This code and information is provided "as is" without warranty of any kind,
+ * either expressed or implied, including but not limited to the implied
+ * warranties of merchantability and/or fitness for a particular purpose.
+ * 
+* Copyright (c) Gauss d.o.o. All rights reserved
  */
 package radiomaster.view;
 
@@ -11,13 +23,14 @@ import radiomaster.restful.HttpWrapper;
 import radiomaster.utility.Utility;
 import static radiomaster.restful.HttpWrapper.LOGIN_URL;
 
-/**
- *
- * @author Gauss Developer
- */
 public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
 
+    //region CLASS PARAMETERS
+
     HttpWrapper wrapper;
+
+    //endregion 
+    
     /**
      * Creates new form login
      */
@@ -30,7 +43,7 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
 
         lblRegister.setForeground(Color.BLUE);
         lblForget.setForeground(Color.RED);
-        
+
         txtEmail.setText("goran@gmail.com");
         txtPassword.setText("goran");
 
@@ -147,12 +160,23 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //region CUSTOM METHODS
+    
+    /**
+     * Pressing button btnLogin the first will be checked if all fields are
+     * filled and then it will check the authorization of data that Login model
+     * contains.
+     *
+     * @param evt
+     */
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
-        if (!kontrola()) {
+        if (!control()) {
             return;
         }
-        
+
         wrapper = new HttpWrapper();
         String postdata = "email=" + txtEmail.getText() + "&" + "password=" + String.valueOf(txtPassword.getPassword());
         byte[] bodyContent = postdata.getBytes();
@@ -161,36 +185,16 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
                 .setMethod("POST")
                 .setOnCompletionListener(this)
                 .setBody(bodyContent);
-                
 
         wrapper.run();
-//        InputStream error = wrapper.getHttpConn().getErrorStream();
-//        System.out.println(error);
-
-//        try {
-//            int code = wrapper.getHttpConn().getResponseCode();
-//            System.out.println("code " + code);
-//            if(code!=200){
-//                JOptionPane.showMessageDialog(
-//                    getRootPane(), //prozor koji ga zove
-//                    "Invalid email or password", //prikazani tekst
-//                    "Error",//naslov
-//                    JOptionPane.ERROR_MESSAGE //vrsta poruke
-//                        );
-//                
-//            
-//            }else{
-//                new Categories().setVisible(true);
-//                this.dispose();
-//            }
-//            
-//        } catch (IOException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//           
-//     
-//        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    /**
+     * Pressing label lblRegister will open the registration form.
+     *
+     * @param evt
+     */
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
         new Register().setVisible(true);
@@ -198,6 +202,8 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
 
     }//GEN-LAST:event_lblRegisterMouseClicked
 
+    //endregion 
+    
     /**
      * @param args the command line arguments
      */
@@ -213,7 +219,13 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 
-    private boolean kontrola() {
+    //region CUSTOM METHODS
+    /**
+     * Calling this method will check if all fields are filled
+     *
+     * @return true
+     */
+    private boolean control() {
 
         if (txtEmail.getText().trim().length() == 0) {
             Utility.error(this, "Insert your email in format example@example.com");
@@ -229,49 +241,30 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
         return true;
 
     }
+    //endregion
 
     @Override
     public void onSuccess(String successBody) {
-        
+
         new Menu().setVisible(true);
         this.dispose();
-        
+
         System.out.println("Successful login");
 
     }
 
     @Override
     public void onError(String error) {
-        
-//       error = String.valueOf(wrapper.getHttpConn().getErrorStream());
-//        System.out.println(error);
-//        
-//        System.setProperty("keep alive", error);
 
         System.out.println("Invalid username or password");
-        
-//        try {
-//                int code = wrapper.getHttpConn().getResponseCode();
-//                if (code>200){
-//                   
-//                }
-//                //InputStream es = wrapper.getHttpConn().getErrorStream();
-//                        
-//             System.out.println("bla bla "+ es);
-//                // close the errorstrem
-//                es.close();
-//        } catch(IOException ex) {
-//                // deal with the exception
-//        }
 
         JOptionPane.showMessageDialog(
-                    getRootPane(), //prozor koji ga zove
-                    "Invalid email or password", //prikazani tekst
-                    "Error",//naslov
-                    JOptionPane.ERROR_MESSAGE //vrsta poruke
-                        );
-        
-        
+                getRootPane(),
+                "Invalid email or password",
+                "Error",//naslov
+                JOptionPane.ERROR_MESSAGE
+        );
+
     }
 
 }
