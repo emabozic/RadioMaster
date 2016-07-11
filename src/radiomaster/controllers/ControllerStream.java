@@ -2,7 +2,7 @@
 * \brief Audio Stream controller
 * \details This controller class is used to provide a player and events to 
 *          control supplied audio stream from a URL. 
-* @author Goran Jumić, Nikolina Pepić
+* @author Goran
 * @version 1.0
 * \date Jul 8, 2016
 * \copyright

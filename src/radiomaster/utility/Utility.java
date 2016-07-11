@@ -5,6 +5,8 @@
  */
 package radiomaster.utility;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

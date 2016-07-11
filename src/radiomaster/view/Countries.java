@@ -29,17 +29,17 @@ import radiomaster.utility.Utility;
 
 
 public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompletion {
-    //region CLASS PARAMETERES
-    
+
     ArrayList<String>                countries;
     DefaultListModel<ModelCountries> model;
     List<ModelCountries>             modelCountries;
     ControllerCountries              cc;
     ModelCountries                   mc;
     ControllerStream                 initControllerStreamInsance = new ControllerStream();
-    //endregion
-    //region CLASS CONSTRUCT
-    
+
+    /**
+     * Creates new form ViewGoran
+     */
     public Countries() throws IOException {
         initComponents();
         setTitle(Utility.APP_NAME);
@@ -49,7 +49,7 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         
         jLbVol.setText(Integer.toString(jSldVol.getValue()) + "%");
         initControllerStreamInsance.setGain((float) 0.8);
-       
+        jLBRadio.setVisible(false);
         jLbImageEQ.setVisible(false);
         
         countries = new ArrayList<>();
@@ -62,9 +62,7 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jLcountries.setModel(model);
         this.modelCountries = cc.getCountries();
     }
-    //ENDREGION
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,8 +96,6 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jLstations = new javax.swing.JList();
         jLBRadio = new javax.swing.JLabel();
         jTxtTemp = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -190,13 +186,9 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jLstations.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(jLstations);
 
-        jLBRadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/1468251005_speaker-off-mute.png"))); // NOI18N
+        jLBRadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/radio.gif"))); // NOI18N
 
         jTxtTemp.setText("http://grt.streamradio.com.hr:9062");
-
-        jLabel11.setText("Choose Country");
-
-        jLabel12.setText("Choose Station");
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -204,62 +196,11 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addGap(93, 93, 93)
-                                        .addComponent(jLBRadio))
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTxtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLbImageEQ))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSldVol, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
-                                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
-                                                .addComponent(jLbPlay)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLbStop))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
-                                                .addComponent(jLbVolumeStatic)
-                                                .addGap(112, 112, 112)
-                                                .addComponent(jLbYVolStatic)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLbVol)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(2155, 2155, 2155))))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanelLayout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(221, 324, Short.MAX_VALUE))
-                                        .addGroup(jPanelLayout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -267,39 +208,79 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jLabel7)))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jLbImageEQ))
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addGap(93, 93, 93)
+                                        .addComponent(jLBRadio)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                                        .addComponent(jLbPlay)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLbStop))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                                        .addComponent(jLbVolumeStatic)
+                                        .addGap(112, 112, 112)
+                                        .addComponent(jLbYVolStatic)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLbVol)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jSldVol, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jTxtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(2155, 2155, 2155))))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel6))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel10)
+                            .addComponent(jTxtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLbPlay)
                                     .addComponent(jLbStop))
@@ -315,14 +296,8 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
                                 .addComponent(jLbImageEQ)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLBRadio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTxtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 36, Short.MAX_VALUE))
+                            .addComponent(jScrollPane3)))
                     .addComponent(jScrollPane1)))
         );
 
@@ -332,9 +307,9 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 865, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -347,8 +322,7 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    //region EVENT METHODS
-    
+
     private void jLcountriesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jLcountriesValueChanged
         mc = (ModelCountries) jLcountries.getSelectedValue();
         jLabel6.setText(String.valueOf(mc.getId()));
@@ -366,35 +340,32 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
     }//GEN-LAST:event_jSldVolStateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        initControllerStreamInsance.StopPlayingAudioStream();
+      initControllerStreamInsance.StopPlayingAudioStream();
     }//GEN-LAST:event_formWindowClosing
 
     private void jLbPlayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbPlayMousePressed
-        try {
+                try {
             if(jLbPlay.isEnabled()) {
                 initControllerStreamInsance.StartPlayingAudioStream(jTxtTemp.getText());
                 jLbImageEQ.setVisible(true);
-                jLBRadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/radio.gif")));
+                jLBRadio.setVisible(true);
                 jLbPlay.setEnabled(false);
             }
         } catch (Exception e) {
-            e.printStackTrace();
           }
     }//GEN-LAST:event_jLbPlayMousePressed
 
     private void jLbStopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbStopMousePressed
-        try {
+               try {
             initControllerStreamInsance.StopPlayingAudioStream();
             jLbImageEQ.setVisible(false);
-            jLBRadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/1468251005_speaker-off-mute.png"))); 
+             jLBRadio.setVisible(false);
             jLbPlay.setEnabled(true);
         } catch (Exception e) {
             e.printStackTrace();
           }
     }//GEN-LAST:event_jLbStopMousePressed
-    //endregion
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -403,8 +374,6 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
     private javax.swing.JLabel jLBRadio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
