@@ -24,6 +24,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import radiomaster.model.ModelCountries;
 import radiomaster.controllers.ControllerCountries;
+import radiomaster.controllers.ControllerStream;
 import radiomaster.utility.Utility;
 
 
@@ -34,6 +35,7 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
     List<ModelCountries>             modelCountries;
     ControllerCountries              cc;
     ModelCountries                   mc;
+    ControllerStream                 initControllerStreamInsance = new ControllerStream();
 
     /**
      * Creates new form ViewGoran
@@ -44,6 +46,11 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         Utility.center(this);
         setResizable(false);
         getContentPane().setBackground(Color.WHITE);
+        
+        jLbVol.setText(Integer.toString(jSldVol.getValue()) + "%");
+        initControllerStreamInsance.setGain((float) 0.8);
+        jLBRadio.setVisible(false);
+        jLbImageEQ.setVisible(false);
         
         countries = new ArrayList<>();
         cc = new ControllerCountries();
@@ -87,11 +94,17 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jLcountries = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
         jLstations = new javax.swing.JList();
-        jLabel11 = new javax.swing.JLabel();
+        jLBRadio = new javax.swing.JLabel();
+        jTxtTemp = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel.setBackground(new java.awt.Color(255, 255, 255));
         jPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,6 +121,11 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jLabel3.setText("Country Code: ");
 
         jLbPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/1467907386_InterfaceExpendet-07.png"))); // NOI18N
+        jLbPlay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLbPlayMousePressed(evt);
+            }
+        });
 
         jSldVol.setBackground(new java.awt.Color(255, 255, 255));
         jSldVol.setValue(80);
@@ -118,6 +136,11 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         });
 
         jLbStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/1467907404_free-09.png"))); // NOI18N
+        jLbStop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLbStopMousePressed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -163,7 +186,9 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         jLstations.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(jLstations);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/radio.gif"))); // NOI18N
+        jLBRadio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/radio.gif"))); // NOI18N
+
+        jTxtTemp.setText("http://grt.streamradio.com.hr:9062");
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
@@ -199,37 +224,40 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addComponent(jLbPlay)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLbStop))
-                                    .addGroup(jPanelLayout.createSequentialGroup()
-                                        .addComponent(jLbVolumeStatic)
-                                        .addGap(112, 112, 112)
-                                        .addComponent(jLbYVolStatic)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLbVol))
-                                    .addComponent(jSldVol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(2155, 2155, 2155))
-                            .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelLayout.createSequentialGroup()
                                         .addGap(28, 28, 28)
                                         .addComponent(jLbImageEQ))
                                     .addGroup(jPanelLayout.createSequentialGroup()
                                         .addGap(93, 93, 93)
-                                        .addComponent(jLabel11)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(jLBRadio)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                                        .addComponent(jLbPlay)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLbStop))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                                        .addComponent(jLbVolumeStatic)
+                                        .addGap(112, 112, 112)
+                                        .addComponent(jLbYVolStatic)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLbVol)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jSldVol, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jTxtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(2155, 2155, 2155))))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+            .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel6))
@@ -248,7 +276,8 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
                         .addGap(18, 18, 18)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel10)
+                            .addComponent(jTxtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelLayout.createSequentialGroup()
@@ -266,10 +295,10 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLbImageEQ)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel11)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3))))
-                .addContainerGap())
+                                .addComponent(jLBRadio)
+                                .addGap(0, 36, Short.MAX_VALUE))
+                            .addComponent(jScrollPane3)))
+                    .addComponent(jScrollPane1)))
         );
 
         setJMenuBar(jMenuBar1);
@@ -287,8 +316,8 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -304,20 +333,47 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
     }//GEN-LAST:event_jLcountriesValueChanged
 
     private void jSldVolStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSldVolStateChanged
-        //        float setvolume = (float) (jSlider1.getValue() / (float) 100);
-        //        System.out.println(jSlider1.getValue() + "%   " + setvolume);
-        //        initControllerStreamInsance.setGain(setvolume);
-        //        jLabel3.setText(Integer.toString(jSlider1.getValue()) + "%");
+        float setvolume = (float) (jSldVol.getValue() / (float) 100);
+        System.out.println(jSldVol.getValue() + "%   " + setvolume);
+        initControllerStreamInsance.setGain(setvolume);
+        jLbVol.setText(Integer.toString(jSldVol.getValue()) + "%");
     }//GEN-LAST:event_jSldVolStateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      initControllerStreamInsance.StopPlayingAudioStream();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jLbPlayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbPlayMousePressed
+                try {
+            if(jLbPlay.isEnabled()) {
+                initControllerStreamInsance.StartPlayingAudioStream(jTxtTemp.getText());
+                jLbImageEQ.setVisible(true);
+                jLBRadio.setVisible(true);
+                jLbPlay.setEnabled(false);
+            }
+        } catch (Exception e) {
+          }
+    }//GEN-LAST:event_jLbPlayMousePressed
+
+    private void jLbStopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbStopMousePressed
+               try {
+            initControllerStreamInsance.StopPlayingAudioStream();
+            jLbImageEQ.setVisible(false);
+             jLBRadio.setVisible(false);
+            jLbPlay.setEnabled(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+          }
+    }//GEN-LAST:event_jLbStopMousePressed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLBRadio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -339,6 +395,7 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSldVol;
+    private javax.swing.JTextField jTxtTemp;
     // End of variables declaration//GEN-END:variables
 
     @Override
