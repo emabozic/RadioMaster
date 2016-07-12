@@ -1,5 +1,4 @@
-/*
- * /**
+/**
 license The MIT License
 
 Copyright (c) 2012-2016 Gauss, www.gauss.hr
@@ -27,44 +26,78 @@ THE SOFTWARE.
 package radiomaster.controllers;
 
 import java.util.List;
-import radiomaster.model.ModelStationResponseModel;
+
+/**
+ *
+ * @author Ema
+ */
 
 
-
-
-public class Response2 {
+public class Response2<T,X> {
     
     private int status;
     private String message;
-    private ModelStationResponseModel content;
+    private List<T> content;
+    private List<X> stations;
 
+    /**
+     * @return the status
+     */
     public int getStatus() {
         return status;
     }
 
+    /**
+     * @param status the status to set
+     */
     public void setStatus(int status) {
         this.status = status;
     }
 
+    /**
+     * @return the message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * @param message the message to set
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public ModelStationResponseModel getContent() {
+    /**
+     * @return the content
+     */
+    public List<T> getContent() {
         return content;
     }
 
-    public void setContent(ModelStationResponseModel content) {
+    /**
+     * @param content the content to set
+     */
+    public void setContent(List<T> content) {
         this.content = content;
     }
 
-    public Response2(int status, String message, ModelStationResponseModel content) {
-        this.status = status;
-        this.message = message;
-        this.content = content;
+    /**
+     * @return the stations
+     */
+    public List<X> getStations() {
+        return stations;
     }
+
+    /**
+     * @param stations the stations to set
+     */
+    public void setStations(List<X> stations) {
+        this.stations = stations;
+    }
+
+  
+    
+    
+    
 }

@@ -28,6 +28,7 @@ package radiomaster.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import radiomaster.model.ModelStations;
@@ -66,17 +67,35 @@ public class ControllerStations {
     public  List<ModelStations> getStations() {
        // HttpWrapper httpreq = new HttpWrapper();
         HttpWrapper httpRequest = new HttpWrapper();
+            
+        
         httpRequest.setURL(STATIONS_URL + "HR/100/0");
         httpRequest.setMethod(HTTP_METHOD_GET);
         httpRequest.run();
         java.lang.reflect.Type tip = new TypeToken<Response<ModelStations>>(){
         }.getType();
         Response<ModelStations> odgovor = new Gson()
-                .fromJson(httpRequest.mResponseBody, tip);
+                .fromJson(httpRequest.getmResponseBody(), tip);
         for (ModelStations item : odgovor.getContent()) {
-            mods = new ModelStations();
-            mods.setName(item.getName());
-
+              mods = new ModelStations();
+              mods.setId(item.getId());
+              mods.setCreated_at(item.getCreated_at());
+              mods.setUpdated_at(item.getUpdated_at());
+              mods.setSlug(item.getSlug());
+              mods.setName(item.getName());
+              mods.setFavorite(item.isFavorite());
+              mods.setDescription(item.getDescription());
+              mods.setCountry(item.getCountry());
+              mods.setWebsite(item.getWebsite());
+              mods.setTwitter_url(item.getTwitter_url());
+              mods.setFacebook_url(item.getFacebook_url());
+              mods.setImage_url(item.getImage_url());
+              mods.setThumb_url(item.getThumb_url());
+              mods.setStream_url(item.getStream_url());
+              mods.setStream_bitrate(item.getStream_bitrate());
+              mods.setCategories(item.getCategories());
+              mods.setRating(item.getRating());
+              mods.setFavorite_count(item.getFavorite_count());
             stations.add(mods);
         }
     return stations;
