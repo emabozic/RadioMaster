@@ -28,6 +28,7 @@ import static radiomaster.restful.HttpWrapper.CATEGORIES_URL;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 
 public class ControllerCategories {
+    
 
     //region CLASS PARAMETERS
     List<ModelCategories> categories = new ArrayList<>();
