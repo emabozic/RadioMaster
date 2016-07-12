@@ -24,7 +24,9 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import radiomaster.model.ModelCountries;
 import radiomaster.controllers.ControllerCountries;
+import radiomaster.controllers.ControllerStations;
 import radiomaster.controllers.ControllerStream;
+import radiomaster.model.ModelStations;
 import radiomaster.utility.Utility;
 
 
@@ -32,10 +34,15 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
     //region CLASS PARAMETERES
     
     ArrayList<String>                countries;
-    DefaultListModel<ModelCountries> model;
+    ArrayList<String>                stations;
+    DefaultListModel<ModelCountries> defaultListModelCountries;
+    DefaultListModel<ModelStations>  defaultListModelStations;
     List<ModelCountries>             modelCountries;
+    List<ModelStations>              modelStations;
     ControllerCountries              cc;
+    ControllerStations               cs;
     ModelCountries                   mc;
+    ModelStations                    ms;
     ControllerStream                 initControllerStreamInsance = new ControllerStream();
     //endregion
     //region CLASS CONSTRUCT
@@ -55,12 +62,24 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
         countries = new ArrayList<>();
         cc = new ControllerCountries();
         napuniCountries();
-        model = new DefaultListModel<>();
+        defaultListModelCountries = new DefaultListModel<>();
         for (ModelCountries mc : modelCountries) {
-            model.addElement(mc);
+            defaultListModelCountries.addElement(mc);
         }
-        jLcountries.setModel(model);
+        jLcountries.setModel(defaultListModelCountries);
         this.modelCountries = cc.getCountries();
+        
+        
+        
+        stations = new ArrayList<>();
+        cs = new ControllerStations();
+        napuniStations();
+        defaultListModelStations = new DefaultListModel<>();
+        for (ModelStations ms : modelStations) {
+            defaultListModelStations.addElement(ms);
+        }
+        jLstations.setModel(defaultListModelStations);
+        this.modelStations = cs.getStations();
     }
     //ENDREGION
     
@@ -441,6 +460,11 @@ public class Countries extends javax.swing.JFrame implements HttpWrapper.OnCompl
 
     private void napuniCountries() {
         this.modelCountries = cc.getCountries();
+
+    }
+    
+    private void napuniStations() {
+        this.modelStations = cs.getStations();
 
     }
 }
