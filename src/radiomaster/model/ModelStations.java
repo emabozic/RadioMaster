@@ -30,11 +30,11 @@ package radiomaster.model;
 
 import java.util.List;
 
-
 public class ModelStations {
-    private int                     status;
-    private String                  message;
-    private Content                 content;
+
+    private int status;
+    private String message;
+    private Content content;
 
     /**
      * @return the status
@@ -78,28 +78,26 @@ public class ModelStations {
         this.content = content;
     }
 
-   
+    public class Station {
 
-
-public static class Content {
-    private int id;
-    private String name;
-    private boolean favorite;
-    private String description; 
-    private String country;
-    private String website;
-    private String twitter_url;
-    private String facebook_url;
-    private String slug;
-    private String image_url;
-    private String thumb_url;
-    private String stream_url;
-    private int stream_bitrate;
-    private String categories;
-    private int rating;
-    private int favorite_count;
-    private String created_at;
-    private String updated_at;
+        private int id;
+        private String name;
+        private boolean favorite;
+        private String description;
+        private String country;
+        private String website;
+        private String twitter_url;
+        private String facebook_url;
+        private String slug;
+        private String image_url;
+        private String thumb_url;
+        private String stream_url;
+        private int stream_bitrate;
+        private String categories;
+        private int rating;
+        private int favorite_count;
+        private String created_at;
+        private String updated_at;
 
         /**
          * @return the id
@@ -352,9 +350,59 @@ public static class Content {
         public void setUpdated_at(String updated_at) {
             this.updated_at = updated_at;
         }
+        
+                @Override
+    public String toString() {
+        return getName(); 
+    }
+    }
 
-}
+    public class Content {
 
+        private int total;
+        private int total_pages;
+        private List<Station> stations;
 
+        /**
+         * @return the total
+         */
+        public int getTotal() {
+            return total;
+        }
 
+        /**
+         * @param total the total to set
+         */
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
+        /**
+         * @return the total_pages
+         */
+        public int getTotal_pages() {
+            return total_pages;
+        }
+
+        /**
+         * @param total_pages the total_pages to set
+         */
+        public void setTotal_pages(int total_pages) {
+            this.total_pages = total_pages;
+        }
+
+        /**
+         * @return the stations
+         */
+        public List<Station> getStations() {
+            return stations;
+        }
+
+        /**
+         * @param stations the stations to set
+         */
+        public void setStations(List<Station> stations) {
+            this.stations = stations;
+        }
+    }
 }

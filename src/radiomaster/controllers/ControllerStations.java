@@ -36,6 +36,7 @@ import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 
+
 /**
  *
  * @author Slaven Karakaš
@@ -45,8 +46,8 @@ import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 public class ControllerStations {
     //region CLASS PARAMETERS
 
-    List<ModelStations> stations = new ArrayList<>();
-    ModelStations mods;
+    List<ModelStations.Station> stations = new ArrayList<>();
+  //  ModelStations.Station mods;
     
 
     //endregion
@@ -64,25 +65,38 @@ public class ControllerStations {
      * them into the lost modeled by ModelCountries
      */
 
-    public  List<ModelStations> getStations() {
+    public  List<ModelStations.Station> getStations(String countrycode) {
     
         HttpWrapper httpRequest = new HttpWrapper();
             
         
-        httpRequest.setURL(STATIONS_URL + "HR/100/0");
+        httpRequest.setURL(STATIONS_URL + countrycode +  "/100/0");
         httpRequest.setMethod(HTTP_METHOD_GET);
         httpRequest.run();
-        
-        
-        java.lang.reflect.Type tip = new TypeToken<ModelStations>(){
-        }.getType();
-       
-        ModelStations odgovor = new Gson()
-                .fromJson(httpRequest.mResponseBody, tip);
       
+        
+//        java.lang.reflect.Type tip = new TypeToken<ModelStations>(){
+//        }.getType();
+//       
+//        ModelStations odgovor = new Gson()
+//                .fromJson(httpRequest.mResponseBody, tip);
+        
+       java.lang.reflect.Type tip1 = new TypeToken<ModelStations>(){
+        }.getType();
+        ModelStations odgovor = new Gson()
+                .fromJson(httpRequest.mResponseBody, tip1);
   
-        for (ModelStations item : odgovor.getContent()) {
-              mods = new ModelStations();
+        for (ModelStations.Station item : odgovor.getContent().getStations()) {
+            
+          //mods = new ModelStations.Station();
+          
+          ModelStations modst = new ModelStations();
+          ModelStations.Station mods = modst.new Station(); 
+        //  ModelStations.Station mods = new ModelStations.Content();
+
+          // station = new ModelStations.Station();
+         //     mods.getContent().setStations;
+             // station.setId(item.getId());
               mods.setId(item.getId());
               mods.setCreated_at(item.getCreated_at());
               mods.setUpdated_at(item.getUpdated_at());
