@@ -28,11 +28,60 @@ THE SOFTWARE.
  */
 package radiomaster.model;
 
-/**
- *
- * @author Slaven Karakaš
- */
+import java.util.List;
+
+
 public class ModelStations {
+    private int                     status;
+    private String                  message;
+    private Content                 content;
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    /**
+     * @return the content
+     */
+    public Content getContent() {
+        return content;
+    }
+
+    /**
+     * @param content the content to set
+     */
+    public void setContent(Content content) {
+        this.content = content;
+    }
+
+   
+
+
+public static class Content {
     private int id;
     private String name;
     private boolean favorite;
@@ -52,271 +101,260 @@ public class ModelStations {
     private String created_at;
     private String updated_at;
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
+        /**
+         * @param id the id to set
+         */
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+        /**
+         * @return the name
+         */
+        public String getName() {
+            return name;
+        }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+        /**
+         * @param name the name to set
+         */
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    /**
-     * @return the favorite
-     */
-    public boolean isFavorite() {
-        return favorite;
-    }
+        /**
+         * @return the favorite
+         */
+        public boolean isFavorite() {
+            return favorite;
+        }
 
-    /**
-     * @param favorite the favorite to set
-     */
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
+        /**
+         * @param favorite the favorite to set
+         */
+        public void setFavorite(boolean favorite) {
+            this.favorite = favorite;
+        }
 
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
+        /**
+         * @return the description
+         */
+        public String getDescription() {
+            return description;
+        }
 
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+        /**
+         * @param description the description to set
+         */
+        public void setDescription(String description) {
+            this.description = description;
+        }
 
-    /**
-     * @return the country
-     */
-    public String getCountry() {
-        return country;
-    }
+        /**
+         * @return the country
+         */
+        public String getCountry() {
+            return country;
+        }
 
-    /**
-     * @param country the country to set
-     */
-    public void setCountry(String country) {
-        this.country = country;
-    }
+        /**
+         * @param country the country to set
+         */
+        public void setCountry(String country) {
+            this.country = country;
+        }
 
-    /**
-     * @return the website
-     */
-    public String getWebsite() {
-        return website;
-    }
+        /**
+         * @return the website
+         */
+        public String getWebsite() {
+            return website;
+        }
 
-    /**
-     * @param website the website to set
-     */
-    public void setWebsite(String website) {
-        this.website = website;
-    }
+        /**
+         * @param website the website to set
+         */
+        public void setWebsite(String website) {
+            this.website = website;
+        }
 
-    /**
-     * @return the twitter_url
-     */
-    public String getTwitter_url() {
-        return twitter_url;
-    }
+        /**
+         * @return the twitter_url
+         */
+        public String getTwitter_url() {
+            return twitter_url;
+        }
 
-    /**
-     * @param twitter_url the twitter_url to set
-     */
-    public void setTwitter_url(String twitter_url) {
-        this.twitter_url = twitter_url;
-    }
+        /**
+         * @param twitter_url the twitter_url to set
+         */
+        public void setTwitter_url(String twitter_url) {
+            this.twitter_url = twitter_url;
+        }
 
-    /**
-     * @return the facebook_url
-     */
-    public String getFacebook_url() {
-        return facebook_url;
-    }
+        /**
+         * @return the facebook_url
+         */
+        public String getFacebook_url() {
+            return facebook_url;
+        }
 
-    /**
-     * @param facebook_url the facebook_url to set
-     */
-    public void setFacebook_url(String facebook_url) {
-        this.facebook_url = facebook_url;
-    }
+        /**
+         * @param facebook_url the facebook_url to set
+         */
+        public void setFacebook_url(String facebook_url) {
+            this.facebook_url = facebook_url;
+        }
 
-    /**
-     * @return the slug
-     */
-    public String getSlug() {
-        return slug;
-    }
+        /**
+         * @return the slug
+         */
+        public String getSlug() {
+            return slug;
+        }
 
-    /**
-     * @param slug the slug to set
-     */
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+        /**
+         * @param slug the slug to set
+         */
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
 
-    /**
-     * @return the image_url
-     */
-    public String getImage_url() {
-        return image_url;
-    }
+        /**
+         * @return the image_url
+         */
+        public String getImage_url() {
+            return image_url;
+        }
 
-    /**
-     * @param image_url the image_url to set
-     */
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
+        /**
+         * @param image_url the image_url to set
+         */
+        public void setImage_url(String image_url) {
+            this.image_url = image_url;
+        }
 
-    /**
-     * @return the thumb_url
-     */
-    public String getThumb_url() {
-        return thumb_url;
-    }
+        /**
+         * @return the thumb_url
+         */
+        public String getThumb_url() {
+            return thumb_url;
+        }
 
-    /**
-     * @param thumb_url the thumb_url to set
-     */
-    public void setThumb_url(String thumb_url) {
-        this.thumb_url = thumb_url;
-    }
+        /**
+         * @param thumb_url the thumb_url to set
+         */
+        public void setThumb_url(String thumb_url) {
+            this.thumb_url = thumb_url;
+        }
 
-    /**
-     * @return the stream_url
-     */
-    public String getStream_url() {
-        return stream_url;
-    }
+        /**
+         * @return the stream_url
+         */
+        public String getStream_url() {
+            return stream_url;
+        }
 
-    /**
-     * @param stream_url the stream_url to set
-     */
-    public void setStream_url(String stream_url) {
-        this.stream_url = stream_url;
-    }
+        /**
+         * @param stream_url the stream_url to set
+         */
+        public void setStream_url(String stream_url) {
+            this.stream_url = stream_url;
+        }
 
-    /**
-     * @return the stream_bitrate
-     */
-    public int getStream_bitrate() {
-        return stream_bitrate;
-    }
+        /**
+         * @return the stream_bitrate
+         */
+        public int getStream_bitrate() {
+            return stream_bitrate;
+        }
 
-    /**
-     * @param stream_bitrate the stream_bitrate to set
-     */
-    public void setStream_bitrate(int stream_bitrate) {
-        this.stream_bitrate = stream_bitrate;
-    }
+        /**
+         * @param stream_bitrate the stream_bitrate to set
+         */
+        public void setStream_bitrate(int stream_bitrate) {
+            this.stream_bitrate = stream_bitrate;
+        }
 
-    /**
-     * @return the categories
-     */
-    public String getCategories() {
-        return categories;
-    }
+        /**
+         * @return the categories
+         */
+        public String getCategories() {
+            return categories;
+        }
 
-    /**
-     * @param categories the categories to set
-     */
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
+        /**
+         * @param categories the categories to set
+         */
+        public void setCategories(String categories) {
+            this.categories = categories;
+        }
 
-    /**
-     * @return the rating
-     */
-    public int getRating() {
-        return rating;
-    }
+        /**
+         * @return the rating
+         */
+        public int getRating() {
+            return rating;
+        }
 
-    /**
-     * @param rating the rating to set
-     */
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
+        /**
+         * @param rating the rating to set
+         */
+        public void setRating(int rating) {
+            this.rating = rating;
+        }
 
-    /**
-     * @return the favorite_count
-     */
-    public int getFavorite_count() {
-        return favorite_count;
-    }
+        /**
+         * @return the favorite_count
+         */
+        public int getFavorite_count() {
+            return favorite_count;
+        }
 
-    /**
-     * @param favorite_count the favorite_count to set
-     */
-    public void setFavorite_count(int favorite_count) {
-        this.favorite_count = favorite_count;
-    }
+        /**
+         * @param favorite_count the favorite_count to set
+         */
+        public void setFavorite_count(int favorite_count) {
+            this.favorite_count = favorite_count;
+        }
 
-    /**
-     * @return the created_at
-     */
-    public String getCreated_at() {
-        return created_at;
-    }
+        /**
+         * @return the created_at
+         */
+        public String getCreated_at() {
+            return created_at;
+        }
 
-    /**
-     * @param created_at the created_at to set
-     */
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
+        /**
+         * @param created_at the created_at to set
+         */
+        public void setCreated_at(String created_at) {
+            this.created_at = created_at;
+        }
 
-    /**
-     * @return the updated_at
-     */
-    public String getUpdated_at() {
-        return updated_at;
-    }
+        /**
+         * @return the updated_at
+         */
+        public String getUpdated_at() {
+            return updated_at;
+        }
 
-    /**
-     * @param updated_at the updated_at to set
-     */
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
-    }
+        /**
+         * @param updated_at the updated_at to set
+         */
+        public void setUpdated_at(String updated_at) {
+            this.updated_at = updated_at;
+        }
 
-       //region CUSTOM METHODS
-    
-    /**
-     * 
-     * @return Method is returning Country name in string format
-     */
-    
-        @Override
-    public String toString() {
-        return getName(); 
-    }
-    
-    //endregion
-    
-    
+}
+
+
+
 }

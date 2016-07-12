@@ -65,17 +65,22 @@ public class ControllerStations {
      */
 
     public  List<ModelStations> getStations() {
-       // HttpWrapper httpreq = new HttpWrapper();
+    
         HttpWrapper httpRequest = new HttpWrapper();
             
         
         httpRequest.setURL(STATIONS_URL + "HR/100/0");
         httpRequest.setMethod(HTTP_METHOD_GET);
         httpRequest.run();
-        java.lang.reflect.Type tip = new TypeToken<Response<ModelStations>>(){
+        
+        
+        java.lang.reflect.Type tip = new TypeToken<ModelStations>(){
         }.getType();
-        Response<ModelStations> odgovor = new Gson()
-                .fromJson(httpRequest.getmResponseBody(), tip);
+       
+        ModelStations odgovor = new Gson()
+                .fromJson(httpRequest.mResponseBody, tip);
+      
+  
         for (ModelStations item : odgovor.getContent()) {
               mods = new ModelStations();
               mods.setId(item.getId());
