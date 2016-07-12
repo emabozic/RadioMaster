@@ -42,55 +42,45 @@ import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 
 
 public class ControllerStations {
+    //region CLASS PARAMETERS
+
     List<ModelStations> stations = new ArrayList<>();
-    ModelStations ms;
-    ControllerCountries cc;
-    List<String> id_c;
-    public ControllerStations(){
-        cc = new ControllerCountries();
-        id_c = cc.getCountryCode();
+    ModelStations mods;
+    
+
+    //endregion
+    //region CLASS CONSTRUCT
+    public ControllerStations() {
+
     }
-    public List<ModelStations> getStations(){
-        HttpWrapper wrapper = new HttpWrapper();
-        for (int i=0; i<stations.size();i++){
-            
-        wrapper.setURL(STATIONS_URL + i + "10/0")
-                .setMethod(HTTP_METHOD_GET);
-        wrapper.run();
 
-        java.lang.reflect.Type tip = new TypeToken<Response<ModelStations>>() {
+    //endregion
+    //region CUSTOM METHODS
+    
+    
+    /**
+     * Calling this method will get countries list from the HttpWrapper and put
+     * them into the lost modeled by ModelCountries
+     */
+
+    public  List<ModelStations> getStations() {
+       // HttpWrapper httpreq = new HttpWrapper();
+        HttpWrapper httpRequest = new HttpWrapper();
+        httpRequest.setURL(STATIONS_URL + "HR/100/0");
+        httpRequest.setMethod(HTTP_METHOD_GET);
+        httpRequest.run();
+        java.lang.reflect.Type tip = new TypeToken<Response<ModelStations>>(){
         }.getType();
-
-        Response<ModelStations> odgovor = new Gson().fromJson(wrapper.getmResponseBody(), tip);
-        
+        Response<ModelStations> odgovor = new Gson()
+                .fromJson(httpRequest.mResponseBody, tip);
         for (ModelStations item : odgovor.getContent()) {
-//            System.out.println("title: " + item.getTitle() /*+ ", created at:" + item.getCreated_at() + ", updated at:" + item.getUpdated_at()*/);
-//            categories.add(item);
-              ms = new ModelStations();
-              ms.setId(item.getId());
-              ms.setCreated_at(item.getCreated_at());
-              ms.setUpdated_at(item.getUpdated_at());
-              ms.setSlug(item.getSlug());
-              ms.setName(item.getName());
-              ms.setFavorite(item.isFavorite());
-              ms.setDescription(item.getDescription());
-              ms.setCountry(item.getCountry());
-              ms.setWebsite(item.getWebsite());
-              ms.setTwitter_url(item.getTwitter_url());
-              ms.setFacebook_url(item.getFacebook_url());
-              ms.setImage_url(item.getImage_url());
-              ms.setThumb_url(item.getThumb_url());
-              ms.setStream_url(item.getStream_url());
-              ms.setStream_bitrate(item.getStream_bitrate());
-              ms.setCategories(item.getCategories());
-              ms.setRating(item.getRating());
-              ms.setFavorite_count(item.getFavorite_count());
-              stations.add(ms);
-            
-        }}
-        return stations;
-       
-}
+            mods = new ModelStations();
+            mods.setName(item.getName());
+
+            stations.add(mods);
+        }
+    return stations;
+    }
 
 
 }

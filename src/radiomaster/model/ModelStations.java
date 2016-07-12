@@ -304,7 +304,19 @@ public class ModelStations {
         this.updated_at = updated_at;
     }
 
-   
+       //region CUSTOM METHODS
+    
+    /**
+     * 
+     * @return Method is returning Country name in string format
+     */
+    
+        @Override
+    public String toString() {
+        return getName(); 
+    }
+    
+    //endregion
     
     
 }
