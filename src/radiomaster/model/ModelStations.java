@@ -78,6 +78,57 @@ public class ModelStations {
         this.content = content;
     }
 
+
+
+    public class Content {
+
+        private int total;
+        private int total_pages;
+        private List<Station> stations;
+
+        /**
+         * @return the total
+         */
+        public int getTotal() {
+            return total;
+        }
+
+        /**
+         * @param total the total to set
+         */
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
+        /**
+         * @return the total_pages
+         */
+        public int getTotal_pages() {
+            return total_pages;
+        }
+
+        /**
+         * @param total_pages the total_pages to set
+         */
+        public void setTotal_pages(int total_pages) {
+            this.total_pages = total_pages;
+        }
+
+        /**
+         * @return the stations
+         */
+        public List<Station> getStations() {
+            return stations;
+        }
+
+        /**
+         * @param stations the stations to set
+         */
+        public void setStations(List<Station> stations) {
+            this.stations = stations;
+        }
+    }
+    
     public class Station {
 
         private int id;
@@ -351,58 +402,9 @@ public class ModelStations {
             this.updated_at = updated_at;
         }
         
-                @Override
-    public String toString() {
-        return getName(); 
-    }
-    }
-
-    public class Content {
-
-        private int total;
-        private int total_pages;
-        private List<Station> stations;
-
-        /**
-         * @return the total
-         */
-        public int getTotal() {
-            return total;
-        }
-
-        /**
-         * @param total the total to set
-         */
-        public void setTotal(int total) {
-            this.total = total;
-        }
-
-        /**
-         * @return the total_pages
-         */
-        public int getTotal_pages() {
-            return total_pages;
-        }
-
-        /**
-         * @param total_pages the total_pages to set
-         */
-        public void setTotal_pages(int total_pages) {
-            this.total_pages = total_pages;
-        }
-
-        /**
-         * @return the stations
-         */
-        public List<Station> getStations() {
-            return stations;
-        }
-
-        /**
-         * @param stations the stations to set
-         */
-        public void setStations(List<Station> stations) {
-            this.stations = stations;
+        @Override
+        public String toString() {
+            return getName(); 
         }
     }
 }

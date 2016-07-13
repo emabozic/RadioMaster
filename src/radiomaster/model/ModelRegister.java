@@ -17,7 +17,7 @@
  */
 package radiomaster.model;
 
-public class ModelRegister extends ModelDateTime {
+public class ModelRegister {
 
     private String username;
     private String email;
@@ -61,13 +61,13 @@ public class ModelRegister extends ModelDateTime {
     //endregion 
     
     //region CUSTOM METHOD
-    /**
-     * * This method overrides toString method
-     * @return Date, Timezone and Timezone type
-     */
-    @Override
-    public String toString() {
-        return getDate() + " " + getTimezone() + " " + getTimezone_type();
-    }
+//    /**
+//     * * This method overrides toString method
+//     * @return Date, Timezone and Timezone type
+//     */
+//    @Override
+//    public String toString() {
+//        return getDate() + " " + getTimezone() + " " + getTimezone_type();
+//    }
     //endregion
 }

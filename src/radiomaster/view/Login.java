@@ -18,6 +18,9 @@
 package radiomaster.view;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import radiomaster.restful.HttpWrapper;
 import radiomaster.utility.Utility;
@@ -246,7 +249,11 @@ public class Login extends javax.swing.JFrame implements HttpWrapper.OnCompletio
     @Override
     public void onSuccess(String successBody) {
 
-        new Menu().setVisible(true);
+        try {
+            new RadioPlayer().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
 
         System.out.println("Successful login");

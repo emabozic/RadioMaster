@@ -2,7 +2,7 @@
  * \brief
  * \details
  *
- * @author Goran
+ * @author Goran Jumić
  * @version 1.0 \date Jul 8, 2016 \copyright This code and information is
  * provided "as is" without warranty of any kind, either expressed or implied,
  * including but not limited to the implied warranties of merchantability and/or
@@ -11,6 +11,7 @@
  */
 package radiomaster.controllers;
 
+import radiomaster.model.ModelResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
@@ -48,9 +49,9 @@ public class ControllerCountries {
         httpRequest.setURL(COUNTRIES_URL);
         httpRequest.setMethod(HTTP_METHOD_GET);
         httpRequest.run();
-        java.lang.reflect.Type tip1 = new TypeToken<Response<ModelCountries>>(){
+        java.lang.reflect.Type tip1 = new TypeToken<ModelResponse<ModelCountries>>(){
         }.getType();
-        Response<ModelCountries> odgovor1 = new Gson()
+        ModelResponse<ModelCountries> odgovor1 = new Gson()
                 .fromJson(httpRequest.mResponseBody, tip1);
         for (ModelCountries item : odgovor1.getContent()) {
             modc = new ModelCountries();
@@ -63,26 +64,6 @@ public class ControllerCountries {
             countries.add(modc);
         }
     return countries;
-    }
-
-    /**
-     * This method will get country code from the specific country and put it
-     * into String
-     * @return 
-     */
-    public List<String> getCountryCode() {
-        HttpWrapper wrapper = new HttpWrapper();
-        cc = new ArrayList<>();
-        wrapper.setURL(COUNTRIES_URL).setMethod(HTTP_METHOD_GET);
-        wrapper.run();
-        java.lang.reflect.Type tip = new TypeToken<Response<ModelCountries>>() {
-        }.getType();
-        Response<ModelCountries> odgovor = new Gson()
-                .fromJson(wrapper.getmResponseBody(), tip);
-        for (ModelCountries item : odgovor.getContent()) {
-            cc.add(String.valueOf(item.getCountry_code()));
-        }
-        return cc;
     }
 
     //endregion

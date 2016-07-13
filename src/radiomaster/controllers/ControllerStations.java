@@ -1,34 +1,18 @@
-/*
- * /**
-license The MIT License
-
-Copyright (c) 2012-2016 Gauss, www.gauss.hr
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+/**
+ * \brief
+ * \details
+ *
+ * @author Goran Jumić
+ * @version 1.0 \date Jul 8, 2016 \copyright This code and information is
+ * provided "as is" without warranty of any kind, either expressed or implied,
+ * including but not limited to the implied warranties of merchantability and/or
+ * fitness for a particular purpose. \par Copyright (c) Gauss d.o.o. All rights
+ * reserved
  */
- 
-
 package radiomaster.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import radiomaster.model.ModelStations;
@@ -36,19 +20,9 @@ import radiomaster.restful.HttpWrapper;
 import static radiomaster.restful.HttpWrapper.HTTP_METHOD_GET;
 import static radiomaster.restful.HttpWrapper.STATIONS_URL;
 
-
-/**
- *
- * @author Slaven Karakaš
- */
-
-
 public class ControllerStations {
     //region CLASS PARAMETERS
-
-    List<ModelStations.Station> stations = new ArrayList<>();
-  //  ModelStations.Station mods;
-    
+    List<ModelStations.Station> stations = new ArrayList<>();  
 
     //endregion
     //region CLASS CONSTRUCT
@@ -59,66 +33,49 @@ public class ControllerStations {
     //endregion
     //region CUSTOM METHODS
     
-    
     /**
-     * Calling this method will get countries list from the HttpWrapper and put
-     * them into the lost modeled by ModelCountries
+     * 
+     * 
      */
 
-    public  List<ModelStations.Station> getStations(String countrycode) {
-    
+    public  List<ModelStations.Station> getStations(String countrycode) { 
         HttpWrapper httpRequest = new HttpWrapper();
-            
-        
         httpRequest.setURL(STATIONS_URL + countrycode +  "/100/0");
         httpRequest.setMethod(HTTP_METHOD_GET);
         httpRequest.run();
       
-        
-//        java.lang.reflect.Type tip = new TypeToken<ModelStations>(){
-//        }.getType();
-//       
-//        ModelStations odgovor = new Gson()
-//                .fromJson(httpRequest.mResponseBody, tip);
-        
-       java.lang.reflect.Type tip1 = new TypeToken<ModelStations>(){
+        java.lang.reflect.Type type = new TypeToken<ModelStations>(){
         }.getType();
-        ModelStations odgovor = new Gson()
-                .fromJson(httpRequest.mResponseBody, tip1);
+        ModelStations response = new Gson()
+                .fromJson(httpRequest.mResponseBody, type);
   
-        for (ModelStations.Station item : odgovor.getContent().getStations()) {
-            
-          //mods = new ModelStations.Station();
-          
-          ModelStations modst = new ModelStations();
-          ModelStations.Station mods = modst.new Station(); 
-        //  ModelStations.Station mods = new ModelStations.Content();
-
-          // station = new ModelStations.Station();
-         //     mods.getContent().setStations;
-             // station.setId(item.getId());
-              mods.setId(item.getId());
-              mods.setCreated_at(item.getCreated_at());
-              mods.setUpdated_at(item.getUpdated_at());
-              mods.setSlug(item.getSlug());
-              mods.setName(item.getName());
-              mods.setFavorite(item.isFavorite());
-              mods.setDescription(item.getDescription());
-              mods.setCountry(item.getCountry());
-              mods.setWebsite(item.getWebsite());
-              mods.setTwitter_url(item.getTwitter_url());
-              mods.setFacebook_url(item.getFacebook_url());
-              mods.setImage_url(item.getImage_url());
-              mods.setThumb_url(item.getThumb_url());
-              mods.setStream_url(item.getStream_url());
-              mods.setStream_bitrate(item.getStream_bitrate());
-              mods.setCategories(item.getCategories());
-              mods.setRating(item.getRating());
-              mods.setFavorite_count(item.getFavorite_count());
-            stations.add(mods);
+        for (ModelStations.Station item : response.getContent().getStations()) {
+              ModelStations modStationRoot = new ModelStations();
+              ModelStations.Station modelStation = modStationRoot.new Station(); 
+              modelStation.setId(item.getId());
+              modelStation.setCreated_at(item.getCreated_at());
+              modelStation.setUpdated_at(item.getUpdated_at());
+              modelStation.setSlug(item.getSlug());
+              modelStation.setName(item.getName());
+              modelStation.setFavorite(item.isFavorite());
+              modelStation.setDescription(item.getDescription());
+              modelStation.setCountry(item.getCountry());
+              modelStation.setWebsite(item.getWebsite());
+              modelStation.setTwitter_url(item.getTwitter_url());
+              modelStation.setFacebook_url(item.getFacebook_url());
+              modelStation.setImage_url(item.getImage_url());
+              modelStation.setThumb_url(item.getThumb_url());
+              modelStation.setStream_url(item.getStream_url());
+              modelStation.setStream_bitrate(item.getStream_bitrate());
+              modelStation.setCategories(item.getCategories());
+              modelStation.setRating(item.getRating());
+              modelStation.setFavorite_count(item.getFavorite_count());
+              stations.add(modelStation);
         }
     return stations;
     }
+    
+    //endregion
 
 
 }

@@ -23,7 +23,7 @@ THE SOFTWARE.
  */
 
 
-package radiomaster.controllers;
+package radiomaster.model;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ import java.util.List;
  */
 
 
-public class Response<T> {
+public class ModelResponse<T> {
     
     private int status;
     private String message;
