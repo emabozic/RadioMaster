@@ -16,6 +16,7 @@
 package radiomaster.controllers;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -27,6 +28,7 @@ import javax.sound.sampled.Port;
 import javax.swing.JOptionPane;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import radiomaster.view.RadioPlayer;
 
 public class ControllerStream {
     //region CLASS PARAMETERS
@@ -37,7 +39,8 @@ public class ControllerStream {
     private BufferedInputStream mBufferedInputStreamAudioStream;
     public Player               mPlayerAudioPlayer;
     
-    private Thread              mAudioPlayerThread = null; 
+    private Thread              mAudioPlayerThread = null;
+    public boolean success = true;
     
     
     //endregion
@@ -70,7 +73,7 @@ public class ControllerStream {
      * 
      * @param link URL from which the audio stream will be played
      */
-    public void StartPlayingAudioStream(String link) {
+    public void StartPlayingAudioStream(String link) throws IOException {
         try {
              URL url = new URL(link);
              Socket socket = new Socket(url.getHost(), url.getPort());
@@ -85,9 +88,13 @@ public class ControllerStream {
              
              mBufferedInputStreamAudioStream = new BufferedInputStream(is);
              mPlayerAudioPlayer = new Player(mBufferedInputStreamAudioStream);
-        } catch (Exception e){
-             System.out.println("Nije moguce pokrenuti stream");
-             e.printStackTrace();
+             success = true;  
+        } catch (Exception e){      
+             JOptionPane.showMessageDialog(null,
+                     "Stream offline, or stream does not exist!",
+                     "Error", 
+                     JOptionPane.ERROR_MESSAGE); 
+             success = false;     
         }
         
         mAudioPlayerThread = new Thread(){

@@ -124,6 +124,12 @@ public class RadioPlayer extends javax.swing.JFrame
 
         jLbPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/1467907386_InterfaceExpendet-07.png"))); // NOI18N
         jLbPlay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLbPlayMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLbPlayMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLbPlayMousePressed(evt);
             }
@@ -139,6 +145,12 @@ public class RadioPlayer extends javax.swing.JFrame
 
         jLbStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/1467907404_free-09.png"))); // NOI18N
         jLbStop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLbStopMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLbStopMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLbStopMousePressed(evt);
             }
@@ -309,14 +321,18 @@ public class RadioPlayer extends javax.swing.JFrame
         try {
             if(jLbPlay.isEnabled()) {
                 initControllerStreamInsance.StopPlayingAudioStream();
+                
                 modelStations = (ModelStations.Station) jLstations
                                 .getSelectedValue();
+                
+                
                 initControllerStreamInsance.StartPlayingAudioStream(
-                                            modelStations.getStream_url());
+                              modelStations.getStream_url());
+                System.out.println(initControllerStreamInsance.success);
+                
+                if (initControllerStreamInsance.success == true) {
                 jLbImageEQ.setVisible(true);
                 jLbPlay.setEnabled(false);
-                
-                
                 jLbStationName.setText(modelStations.getName());
                 if (modelStations.getDescription() != null) {
                     jLbStationDesc.setText(modelStations.getDescription());   
@@ -324,7 +340,6 @@ public class RadioPlayer extends javax.swing.JFrame
                 else {
                     jLbStationDesc.setText("");
                 }
-
                 if (modelStations.getImage_url() != null) {
                     System.out.println(modelStations.getImage_url());
                     URL url = new URL(modelStations.getImage_url());
@@ -334,6 +349,18 @@ public class RadioPlayer extends javax.swing.JFrame
                 else {
                     jLbStationLogo.setIcon(null);
                 }
+                }
+                else
+                {
+                try {
+                     initControllerStreamInsance.StopPlayingAudioStream();
+                     jLbImageEQ.setVisible(false);
+                     jLbPlay.setEnabled(true);
+                } catch (Exception e) {
+                     e.printStackTrace();
+                } 
+                }
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -356,6 +383,22 @@ public class RadioPlayer extends javax.swing.JFrame
        jLbPlay.setEnabled(true);
 
     }//GEN-LAST:event_jLstationsValueChanged
+
+    private void jLbPlayMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbPlayMouseEntered
+       jLbPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/playhover.png")));
+    }//GEN-LAST:event_jLbPlayMouseEntered
+
+    private void jLbStopMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbStopMouseEntered
+       jLbStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/stophover.png")));
+    }//GEN-LAST:event_jLbStopMouseEntered
+
+    private void jLbPlayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbPlayMouseExited
+       jLbPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/playimage.png")));
+    }//GEN-LAST:event_jLbPlayMouseExited
+
+    private void jLbStopMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbStopMouseExited
+     jLbStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/radiomaster/images/stopimage.png")));
+    }//GEN-LAST:event_jLbStopMouseExited
     //endregion
     
     
@@ -388,7 +431,7 @@ public class RadioPlayer extends javax.swing.JFrame
     @Override
     public void onError(String error) {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     Utility.error(this, "Nemrem BRE da pustim strim");
+     
         
 
     }
